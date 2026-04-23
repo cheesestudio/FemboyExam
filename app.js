@@ -240,6 +240,28 @@ const QuizStateMachine = {
         document.getElementById('start-btn').addEventListener('click', () => {
             this.transitionTo(this.states.QUESTION);
         });
+
+        document.getElementById('btn-yes').addEventListener('click', () => {
+            this.answerQuestion(true);
+        });
+
+        document.getElementById('btn-no').addEventListener('click', () => {
+            this.answerQuestion(false);
+        });
+
+        document.getElementById('btn-restart').addEventListener('click', () => {
+            this.data.currentQuestionIndex = 0;
+            this.data.answers = [];
+            this.transitionTo(this.states.WELCOME);
+        });
+
+        document.getElementById('btn-share-image').addEventListener('click', () => {
+            generateShareImage();
+        });
+
+        document.getElementById('btn-share-link').addEventListener('click', () => {
+            copyShareLink(this.data.result);
+        });
     }
 };
 
