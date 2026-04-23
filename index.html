@@ -7,83 +7,66 @@
     <meta name="theme-color" content="#FFB5BA">
     <title>男娘指数测试 ✨</title>
 
-    <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link rel="preconnect" href="https://html2canvas.hertzen.com">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Critical CSS first -->
     <style>
-        /* Critical above-the-fold styles */
         *{margin:0;padding:0;box-sizing:border-box}
         body{min-height:100vh;background:linear-gradient(135deg,#FFB5BA 0%,#FFEAA7 50%,#A0D2EB 100%);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
         .page{opacity:0;transform:translateY(20px);transition:opacity 0.4s ease,transform 0.4s ease;pointer-events:none;position:absolute;inset:0}
-        .page.active{opacity:1;transform:translateY(0);pointer-events:auto;position:relative}
-        .hidden{display:none}
+        .page.active{opacity:1;transform:translateY(0);pointer-events:auto}
+        button{min-height:48px}
     </style>
-
-    <!-- External resources -->
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
-
-    <!-- Defer non-critical scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js" defer></script>
-    <script src="questions.js" defer></script>
-    <script src="scoring.js" defer></script>
-    <script src="radar-chart.js" defer></script>
-    <script type="module" src="share.js" defer></script>
-    <script type="module" src="app.js" defer></script>
 </head>
-<body class="min-h-screen">
-    <a href="#main-content" class="skip-link">跳过导航</a>
+<body>
+    <div id="app" class="max-w-md mx-auto px-4 py-8 min-h-screen relative">
+        <div id="welcome-page" class="page active">
+            <div class="card p-8 text-center">
+                <h1 class="text-3xl font-bold mb-4 text-pink-600">✨ 男娘指数测试 ✨</h1>
+                <p class="text-gray-600 mb-8">一共20道题目，测试你到底有多可爱！</p>
+                <button id="start-btn" class="answer-btn w-full py-4 rounded-full bg-gradient-to-r from-pink-400 to-purple-400 text-white font-bold text-lg">
+                    开始测试
+                </button>
+            </div>
+        </div>
 
-    <div class="container mx-auto px-4 py-8 max-w-2xl min-h-screen flex flex-col">
-        <!-- 头部导航 -->
-        <header role="banner" class="mb-8">
-            <h1 class="text-3xl md:text-4xl font-bold text-center text-white drop-shadow-lg">✨ 男娘指数测试</h1>
-            <p class="text-center text-white/90 mt-2 text-sm md:text-base">趣味性格测试 - 10道题了解你的属性</p>
-        </header>
-
-        <!-- 主内容区域 -->
-        <main id="main-content" role="main" class="flex-grow relative">
-
-            <!-- 欢迎页面 -->
-            <section id="welcome-page" class="page active bg-white/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-xl">
-                <div class="text-center space-y-6">
-                    <div class="text-6xl mb-4">🌸</div>
-                    <h2 class="text-2xl font-semibold text-gray-800">欢迎来到测试</h2>
-                    <p class="text-gray-600">通过简单的10道题，测试你的萌系属性指数</p>
-                    <p class="text-gray-500 text-sm">所有数据仅保存在本地，不会上传到服务器</p>
-
-                    <button id="start-btn" class="btn btn-primary w-full md:w-auto min-h-[48px] px-8 py-3 mt-6">
-                        开始测试
-                    </button>
+        <div id="question-page" class="page">
+            <div class="progress-bar mb-6">
+                <div id="progress-bar" class="progress-fill" style="width: 0%"></div>
+            </div>
+            <div class="text-center text-gray-500 mb-4" id="progress-text">第 1 / 20 题</div>
+            <div class="card p-8">
+                <h2 id="question-text" class="text-xl font-medium mb-8 text-center"></h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <button id="btn-yes" class="answer-btn py-4 rounded-xl bg-pink-200 text-pink-700 font-bold">✅ 是</button>
+                    <button id="btn-no" class="answer-btn py-4 rounded-xl bg-gray-200 text-gray-700 font-bold">❌ 否</button>
                 </div>
-            </section>
+            </div>
+        </div>
 
-            <!-- 答题页面 -->
-            <section id="question-page" class="page hidden bg-white/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-xl">
-                <div class="progress-bar-container mb-6">
-                    <div class="progress-bar bg-gray-200 rounded-full h-2 overflow-hidden">
-                        <div id="progress-bar" class="progress-fill bg-macaron-pink h-full transition-all duration-500 ease-out" style="width: 0%"></div>
-                    </div>
-                    <p id="progress-text" class="text-sm text-gray-500 mt-2 text-center"></p>
+        <div id="result-page" class="page">
+            <div id="result-card" class="card p-6">
+                <div class="text-center mb-4">
+                    <div id="result-rank" class="text-5xl font-bold text-pink-500 mb-2">A</div>
+                    <div id="result-score" class="text-lg text-gray-600">综合得分: 75分</div>
                 </div>
-
-                <div id="question-container" class="space-y-6"></div>
-            </section>
-
-            <!-- 结果页面 -->
-            <section id="result-page" class="page hidden bg-white/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-xl">
-                <div id="result-container" class="space-y-6"></div>
-            </section>
-
-        </main>
-
-        <!-- 页脚 -->
-        <footer role="contentinfo" class="mt-12 text-center text-white/70 text-sm">
-            <p>© 2026 男娘指数测试 | 仅供娱乐</p>
-        </footer>
+                <canvas id="radar-chart" width="400" height="400"></canvas>
+                <div class="mt-6 grid grid-cols-2 gap-3">
+                    <button id="btn-share-image" class="answer-btn py-3 rounded-xl bg-pink-300 text-pink-800 font-medium">📸 保存图片</button>
+                    <button id="btn-share-link" class="answer-btn py-3 rounded-xl bg-blue-300 text-blue-800 font-medium">🔗 复制链接</button>
+                </div>
+                <button id="btn-restart" class="answer-btn w-full mt-4 py-3 rounded-xl bg-gray-200 text-gray-700">🔄 重新测试</button>
+            </div>
+        </div>
     </div>
+
+    <script src="questions.js"></script>
+    <script src="scoring.js"></script>
+    <script src="radar-chart.js"></script>
+    <script src="share.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
