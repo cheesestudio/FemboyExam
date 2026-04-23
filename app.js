@@ -63,20 +63,20 @@ function finishTest() {
 
     // 生成性格分析报告
     // ✅ 正确匹配 REPORT_DIMENSIONS 顺序: openness, conscientiousness, extraversion, agreeableness, neuroticism, decisiveness
-    // ✅ 模板只有 1/2/3 三个等级，所以我们 +1 来避免 0 值
+    // ✅ 模板只有 1/2/3 三个等级，使用 Math.ceil 安全处理边界值，永远不会超出范围
     const scoreArray = [
       // 脑洞大小 ← soft
-      Math.min(3, Math.floor(result.scores.soft / 25) + 1),
+      Math.max(1, Math.min(3, Math.ceil((result.scores.soft || 1) / 34))),
       // 靠谱程度 ← action
-      Math.min(3, Math.floor(result.scores.action / 25) + 1),
+      Math.max(1, Math.min(3, Math.ceil((result.scores.action || 1) / 34))),
       // 社牛等级 ← 反向 shy
-      Math.max(1, 4 - Math.floor(result.scores.shy / 25)),
+      Math.max(1, Math.min(3, Math.ceil((100 - result.scores.shy || 1) / 34))),
       // 老好人指数 ← feminine
-      Math.min(3, Math.floor(result.scores.feminine / 25) + 1),
+      Math.max(1, Math.min(3, Math.ceil((result.scores.feminine || 1) / 34))),
       // 情绪稳定度 ← voice
-      Math.min(3, Math.floor(result.scores.voice / 25) + 1),
+      Math.max(1, Math.min(3, Math.ceil((result.scores.voice || 1) / 34))),
       // 果断程度 ← identity
-      Math.min(3, Math.floor(result.scores.identity / 25) + 1)
+      Math.max(1, Math.min(3, Math.ceil((result.scores.identity || 1) / 34)))
     ];
     document.getElementById('personality-report').textContent = generateReport(scoreArray).report;
   }, 400);
