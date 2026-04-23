@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据可视化报表生成器</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen bg-gradient-to-br from-macaron-pink via-macaron-yellow to-macaron-blue">
+    <div class="container mx-auto px-4 py-8">
+        <!-- 头部导航 -->
+        <header class="mb-8">
+            <h1 class="text-4xl font-bold text-center text-white drop-shadow-lg">📊 数据可视化报表生成器</h1>
+            <p class="text-center text-white/80 mt-2">一键生成专业美观的数据报告</p>
+        </header>
+
+        <!-- 主内容区域 -->
+        <main class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- 左侧控制面板 -->
+            <aside class="lg:col-span-3 bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
+                <h2 class="text-xl font-semibold mb-4 text-gray-700">数据配置</h2>
+                <!-- 控制面板占位 -->
+                <div class="space-y-4">
+                    <p class="text-gray-500 text-sm">配置项区域</p>
+                </div>
+            </aside>
+
+            <!-- 中间预览区域 -->
+            <section class="lg:col-span-6 bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
+                <h2 class="text-xl font-semibold mb-4 text-gray-700">报表预览</h2>
+                <!-- 图表预览区域 -->
+                <div id="chart-container" class="min-h-96 bg-white/50 rounded-xl p-4">
+                    <canvas id="mainChart"></canvas>
+                </div>
+            </section>
+
+            <!-- 右侧导出面板 -->
+            <aside class="lg:col-span-3 bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
+                <h2 class="text-xl font-semibold mb-4 text-gray-700">导出选项</h2>
+                <!-- 导出面板占位 -->
+                <div class="space-y-4">
+                    <p class="text-gray-500 text-sm">导出功能区域</p>
+                </div>
+            </aside>
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="mt-12 text-center text-white/70 text-sm">
+            <p>© 2026 数据可视化报表生成器 | 马卡龙配色主题</p>
+        </footer>
+    </div>
+
+    <script>
+        // 基础初始化脚本
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('应用初始化完成');
+        });
+    </script>
+</body>
+</html>

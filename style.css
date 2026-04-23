@@ -1,0 +1,122 @@
+/* 马卡龙配色系统 */
+:root {
+    /* 主色调 - 马卡龙色系 */
+    --macaron-pink: #FFB5BA;
+    --macaron-yellow: #FFEAA7;
+    --macaron-blue: #A0D2EB;
+    --macaron-green: #B8E6C4;
+    --macaron-purple: #D4B5E8;
+    --macaron-orange: #FFD3A3;
+
+    /* 中性色 */
+    --macaron-white: #FFFAF0;
+    --macaron-gray: #F0F0F0;
+    --macaron-dark-gray: #666666;
+}
+
+/* Tailwind 扩展配置 */
+@layer utilities {
+    .bg-macaron-pink { background-color: var(--macaron-pink); }
+    .bg-macaron-yellow { background-color: var(--macaron-yellow); }
+    .bg-macaron-blue { background-color: var(--macaron-blue); }
+    .bg-macaron-green { background-color: var(--macaron-green); }
+    .bg-macaron-purple { background-color: var(--macaron-purple); }
+    .bg-macaron-orange { background-color: var(--macaron-orange); }
+
+    .text-macaron-pink { color: var(--macaron-pink); }
+    .text-macaron-yellow { color: var(--macaron-yellow); }
+    .text-macaron-blue { color: var(--macaron-blue); }
+    .text-macaron-green { color: var(--macaron-green); }
+    .text-macaron-purple { color: var(--macaron-purple); }
+    .text-macaron-orange { color: var(--macaron-orange); }
+
+    .border-macaron-pink { border-color: var(--macaron-pink); }
+    .border-macaron-yellow { border-color: var(--macaron-yellow); }
+    .border-macaron-blue { border-color: var(--macaron-blue); }
+    .border-macaron-green { border-color: var(--macaron-green); }
+    .border-macaron-purple { border-color: var(--macaron-purple); }
+    .border-macaron-orange { border-color: var(--macaron-orange); }
+}
+
+/* 全局基础样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 卡片阴影效果 */
+.card-shadow {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* 按钮基础样式 */
+.btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 12px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* 输入框样式 */
+.input-field {
+    border-radius: 10px;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: var(--macaron-blue);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(160, 210, 235, 0.2);
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 181, 186, 0.6);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 181, 186, 0.8);
+}
+
+/* 淡入动画 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+}
