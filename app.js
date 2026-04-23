@@ -62,7 +62,16 @@ function finishTest() {
     document.getElementById('result-score').textContent = `综合得分: ${result.total}分`;
 
     // 生成性格分析报告
-    document.getElementById('personality-report').textContent = generateReport(result.scores);
+    // 转换成6个维度的分数数组
+    const scoreArray = [
+      result.scores.soft,
+      result.scores.shy,
+      result.scores.feminine,
+      result.scores.voice,
+      result.scores.identity,
+      result.scores.action
+    ];
+    document.getElementById('personality-report').textContent = generateReport(scoreArray);
   }, 400);
 }
 
