@@ -43,13 +43,20 @@ function answer(value) {
 
 function finishTest() {
   result = calculateScore(answers);
-  showPage('result');
 
-  document.getElementById('result-rank').textContent = result.rank;
-  document.getElementById('result-score').textContent = `综合得分: ${result.total}分`;
+  // 添加加载过渡动画
+  document.getElementById('question-page').classList.add('fade-out');
 
-  renderRadarChart('radar-chart', result.scores);
-  initShareButtons(result);
+  setTimeout(() => {
+    showPage('result');
+    document.getElementById('result-rank').textContent = result.rank;
+    document.getElementById('result-score').textContent = `综合得分: ${result.total}分`;
+
+    // 延迟渲染雷达图增加动画效果
+    setTimeout(() => {
+      window.renderRadarChart('radar-chart', result.scores);
+    }, 300);
+  }, 400);
 }
 
 function restart() {
