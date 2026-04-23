@@ -19,7 +19,7 @@ function calculateScore(answers) {
   const average = Math.round(total / 6);
 
   let rank;
-  if (average >= 90) rank = 'S';
+  if (average >= 90) rank = 'Saob';
   else if (average >= 75) rank = 'A';
   else if (average >= 60) rank = 'B';
   else if (average >= 40) rank = 'C';
