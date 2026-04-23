@@ -61,10 +61,8 @@ function finishTest() {
     document.getElementById('result-rank').textContent = result.rank;
     document.getElementById('result-score').textContent = `综合得分: ${result.total}分`;
 
-    // 延迟渲染雷达图增加动画效果
-    setTimeout(() => {
-      window.renderRadarChart('radar-chart', result.scores);
-    }, 300);
+    // 生成性格分析报告
+    generatePersonalityReport(result);
   }, 400);
 }
 
