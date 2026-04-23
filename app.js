@@ -62,16 +62,23 @@ function finishTest() {
     document.getElementById('result-score').textContent = `综合得分: ${result.total}分`;
 
     // 生成性格分析报告
-    // 转换成6个维度的分数数组
+    // ✅ 正确匹配 REPORT_DIMENSIONS 顺序: openness, conscientiousness, extraversion, agreeableness, neuroticism, decisiveness
+    // ✅ 模板只有 1/2/3 三个等级，所以我们 +1 来避免 0 值
     const scoreArray = [
-      result.scores.soft,
-      result.scores.shy,
-      result.scores.feminine,
-      result.scores.voice,
-      result.scores.identity,
-      result.scores.action
+      // 脑洞大小 ← soft
+      Math.min(3, Math.floor(result.scores.soft / 25) + 1),
+      // 靠谱程度 ← action
+      Math.min(3, Math.floor(result.scores.action / 25) + 1),
+      // 社牛等级 ← 反向 shy
+      Math.max(1, 4 - Math.floor(result.scores.shy / 25)),
+      // 老好人指数 ← feminine
+      Math.min(3, Math.floor(result.scores.feminine / 25) + 1),
+      // 情绪稳定度 ← voice
+      Math.min(3, Math.floor(result.scores.voice / 25) + 1),
+      // 果断程度 ← identity
+      Math.min(3, Math.floor(result.scores.identity / 25) + 1)
     ];
-    document.getElementById('personality-report').textContent = generateReport(scoreArray);
+    document.getElementById('personality-report').textContent = generateReport(scoreArray).report;
   }, 400);
 }
 

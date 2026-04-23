@@ -475,7 +475,7 @@ function generateReport(scores) {
   const paragraphs = [];
   const usedVariants = new Set();
 
-  DIMENSIONS.forEach((dim, index) => {
+  REPORT_DIMENSIONS.forEach((dim, index) => {
     const level = scores[index];
     const templates = BASE_TEMPLATES[dim.id][level];
 
