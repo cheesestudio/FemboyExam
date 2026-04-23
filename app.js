@@ -112,7 +112,7 @@ const QuizStateMachine = {
      * 渲染当前题目
      */
     renderCurrentQuestion() {
-        const question = questions[this.data.currentQuestionIndex];
+        const question = QUESTIONS[this.data.currentQuestionIndex];
         const container = document.getElementById('question-container');
 
         container.innerHTML = `
@@ -152,7 +152,7 @@ const QuizStateMachine = {
 
         // 延迟后切换到下一题或结果
         setTimeout(() => {
-            if (this.data.currentQuestionIndex < questions.length - 1) {
+            if (this.data.currentQuestionIndex < QUESTIONS.length - 1) {
                 this.data.currentQuestionIndex++;
                 this.renderCurrentQuestion();
                 this.updateProgressBar();
@@ -166,12 +166,12 @@ const QuizStateMachine = {
      * 更新进度条
      */
     updateProgressBar() {
-        const progress = ((this.data.currentQuestionIndex + 1) / questions.length) * 100;
+        const progress = ((this.data.currentQuestionIndex + 1) / QUESTIONS.length) * 100;
         const progressBar = document.getElementById('progress-bar');
         progressBar.style.width = `${progress}%`;
 
         document.getElementById('progress-text').textContent =
-            `题目 ${this.data.currentQuestionIndex + 1} / ${questions.length}`;
+            `题目 ${this.data.currentQuestionIndex + 1} / ${QUESTIONS.length}`;
     },
 
     /**
