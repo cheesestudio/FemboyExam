@@ -313,14 +313,76 @@ body {
     animation: fadeIn 0.4s ease-out forwards;
 }
 
-/* 响应式调整 */
+/* 响应式调整 - 移动端竖屏优化 */
 @media (max-width: 640px) {
-    .container {
-        padding: 16px 12px;
+    #app {
+        padding: 20px 12px !important;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+
+    .card {
+        padding: 24px 16px !important;
+        margin: 0 4px;
+        border-radius: 28px;
+    }
+
+    h1 {
+        font-size: 1.75rem !important;
+        line-height: 1.3;
+        margin-bottom: 24px;
+    }
+
+    h2 {
+        font-size: 1.25rem !important;
+        line-height: 1.4;
+        margin-bottom: 32px;
+    }
+
+    button {
+        min-height: 56px !important;
+        font-size: 1.1rem !important;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        margin-bottom: 12px;
+    }
+
+    .progress-bar {
+        height: 10px !important;
+        margin-bottom: 24px !important;
+        border-radius: 5px;
+    }
+
+    canvas {
+        width: 100% !important;
+        height: auto !important;
+        max-height: 300px;
     }
 
     .score-value {
         font-size: 56px;
+    }
+
+    body {
+        padding-bottom: 30px;
+    }
+}
+
+@media (orientation: portrait) {
+    html, body {
+        overflow-x: hidden;
+    }
+
+    #app {
+        padding-top: 16px !important;
+        padding-bottom: 40px !important;
+    }
+}
+
+@media (orientation: landscape) {
+    #app {
+        max-width: 720px;
     }
 }
 
