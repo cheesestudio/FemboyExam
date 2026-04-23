@@ -4,6 +4,8 @@
  * 包含进度条、页面切换动画、答题逻辑
  */
 
+import { initShareButtons, decodeShareLink } from './share.js';
+
 const QuizStateMachine = {
     // 状态定义
     states: {
@@ -232,6 +234,16 @@ const QuizStateMachine = {
         document.getElementById('restart-btn').addEventListener('click', () => {
             RadarChartComponent.destroy();
             this.transitionTo(this.states.WELCOME);
+        });
+
+        // 初始化分享按钮
+        const resultCard = resultContainer.querySelector('.result-card');
+        initShareButtons(resultCard, () => {
+            return {
+                score: this.data.score,
+                answers: this.data.answers,
+                timestamp: Date.now()
+            };
         });
     },
 
