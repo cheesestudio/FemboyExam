@@ -5,7 +5,7 @@
  */
 
 // 6 个人格维度 (大五人格 + 决策模式)
-const DIMENSIONS = [
+const REPORT_DIMENSIONS = [
   { id: 'openness', name: '脑洞大小', opposite: '务实主义' },
   { id: 'conscientiousness', name: '靠谱程度', opposite: '摸鱼天赋' },
   { id: 'extraversion', name: '社牛等级', opposite: '社恐纯度' },
@@ -58,351 +58,351 @@ const BASE_TEMPLATES = {
       "就喜欢实打实的东西，模棱两可的事最头疼了"
     ],
     0: [
-      "You are exceptionally practical and grounded, with a strong preference for proven, reliable methods over experimental approaches.",
-      "You focus intensely on the present reality and what can be immediately accomplished, rather than speculative possibilities.",
-      "You have little patience for abstract theories or creative ideas that don't have clear, immediate practical applications.",
-      "Consistency and dependability matter far more to you than novelty or innovation.",
-      "You strongly prefer familiar routines and experiences, and feel most comfortable when you know what to expect.",
-      "You value tradition and established wisdom, believing that what has worked in the past will continue to work well.",
-      "You communicate clearly and directly, preferring literal meaning over metaphor or subtlety.",
-      "You dislike change and prefer environments that remain stable and predictable over time.",
-      "You make decisions based on hard facts and concrete evidence, rather than intuition or creative insight.",
-      "You excel at implementing existing solutions reliably, rather than inventing new approaches."
+      "超级务实的老实人，只信经过验证的老办法，花里胡哨的骚操作你看都懒得看",
+      "只关心眼下实打实能办成的事，扯那些没影的可能性你直接哈欠连天",
+      "空理论脑洞什么的最无聊了，不能立刻落地用的东西跟你半毛钱关系都没有",
+      "稳才是王道！靠谱稳定比什么新鲜花样都重要一万倍",
+      "就喜欢熟悉的日常，知道接下来要发生什么的时候才最安心",
+      "老祖宗传下来的规矩肯定是有道理的，没事瞎改个屁啊",
+      "有话直说别整虚的，玩梗拐弯抹角什么的真的累",
+      "讨厌变来变去，安安稳稳按部就班的环境才是天堂",
+      "只认实打实的证据和数据，什么直觉脑洞统统靠边站",
+      "把现成的东西稳稳落实才是你的强项，搞新发明什么的跟你没关系"
     ]
   },
   conscientiousness: {
     3: [
-      "You are remarkably reliable and thorough; people know they can count on you to follow through completely on every commitment.",
-      "You naturally organize your life with intention and purpose, planning carefully to ensure goals are met effectively.",
-      "Details matter deeply to you - you notice things that others miss, and you ensure work is done properly the first time.",
-      "You have an exceptional sense of responsibility, and you take pride in fulfilling your obligations completely.",
-      "Self-discipline comes naturally to you; you are able to stay focused on long-term goals even when immediate temptations arise.",
-      "You approach tasks systematically, breaking complex projects down into manageable steps and executing them consistently.",
-      "You hold yourself to very high standards, and you are rarely satisfied with work that is merely 'good enough'.",
-      "You plan ahead thoughtfully, anticipating potential problems and preparing for them before they occur.",
-      "You are extremely dependable; your commitments are not taken lightly, and you always deliver what you promise.",
-      "You prefer structure and order, and you create systems that help both yourself and others work more effectively."
+      "靠谱到离谱！只要是你答应过的事，所有人都可以放一百二十个心绝对会办妥",
+      "天生就会把生活安排的明明白白，每件事都有计划有章法，绝不会瞎鸡儿乱搞",
+      "眼里全是细节！别人注意不到的小破地方你一眼就能揪出来，做事一次就给你整到位",
+      "责任心爆炸，只要是自己该扛的事绝对不会甩锅，把事情办好比什么都爽",
+      "自律已经刻进DNA里了，就算外面诱惑拉满也能稳稳盯着目标往前走",
+      "做事情永远有条有理，再复杂的破事到你手里都能拆成顺顺当当的一步步",
+      "对自己要求超级严格，「差不多就行了」这种话你听了就浑身难受",
+      "永远会提前想好各种幺蛾子，出问题之前就已经把预案准备好了",
+      "全世界最靠谱的人就是你，说出口的承诺就是砸锅卖铁也要兑现",
+      "就喜欢井井有条的感觉，不仅自己顺，还能把周围人也带的效率拉满"
     ],
     2: [
-      "You are generally reliable and responsible, though you also know when it's okay to relax your standards a little.",
-      "You plan ahead for important things, but you also allow room for spontaneity when the situation allows.",
-      "You are thorough with work that matters, though you don't waste energy perfecting things that are unimportant.",
-      "You follow through on most commitments, while recognizing that sometimes flexibility is more important than strict adherence.",
-      "You have good self-discipline when you need it, but you don't force yourself to be productive every waking moment.",
-      "You create structure when it helps, but you are comfortable working without rigid systems when that works better.",
-      "You hold good standards for your work, but you know when 'good enough' actually is good enough.",
-      "You prepare adequately for most situations, without over-preparing or worrying excessively about unlikely problems.",
-      "People know they can generally count on you, though you are human and occasionally let things slip like everyone else.",
-      "You balance order and flexibility appropriately, adjusting your approach based on what the situation actually requires."
+      "平时该靠谱的时候绝对靠谱，但也懂的什么时候该摸鱼放松一下下啦",
+      "重要的事肯定会提前安排好，但是该浪的时候也绝不会死抠计划不放",
+      "该认真的地方绝对给你整到位，但是屁大点的破事才不会瞎浪费精力",
+      "答应的事基本都会做到，但是真有特殊情况也懂的变通不是死脑筋",
+      "该自律的时候能顶得住，但是绝对不会逼自己二十四小时都在那卷",
+      "有用的规矩就守，没用的条条框框才不会傻了吧唧硬遵守",
+      "对自己有要求，但是也懂的什么时候「差不多行了」才是最优解",
+      "该准备的都准备好，但也不会闲的蛋疼去担心那些根本不可能发生的破事",
+      "大伙都知道找你办事基本靠谱，当然偶尔也会翻车啦毕竟都是凡人嘛",
+      "该严就严该松就松，永远根据实际情况来，不会死抱着死规矩不放"
     ],
     1: [
-      "You prefer to go with the flow rather than create rigid plans, enjoying the freedom to adapt as things unfold.",
-      "You are comfortable working in flexible environments, and you dislike feeling constrained by excessive rules or procedures.",
-      "While you mean well, you sometimes struggle to follow through on all commitments when other interesting opportunities appear.",
-      "You prioritize enjoying the present moment over excessive planning for the future.",
-      "You don't get caught up in minor details, preferring to focus on the big picture rather than perfecting every small part.",
-      "Self-discipline is something you work at rather than something that comes naturally to you.",
-      "You work best when you have freedom to approach tasks in your own way and at your own pace.",
-      "You don't feel the need to control every detail, and you are comfortable letting things develop organically.",
-      "You would rather improvise creatively than follow a rigid pre-planned approach.",
-      "You bring a relaxed, easygoing energy to projects that helps everyone feel less stressed about deadlines."
+      "才懒得做什么死计划，走一步看一步随机应变才是最舒服的啦",
+      "讨厌被各种破规矩绑死，能灵活发挥的环境才是你的快乐老家",
+      "虽然本意是好的啦，但是半路出现有意思的东西就很容易摸鱼跑掉😅",
+      "先爽了当下再说，想那么远以后的事累不累啊",
+      "小细节什么的管他呢，大方向没错就行，抠那么细想死啊",
+      "自律这东西... 嗯，正在努力了正在努力了",
+      "让老子按自己节奏自己想法来的时候，反而能把事办的最好",
+      "没必要什么都捏在手里控制住，让事情自然发展不好嘛",
+      "临场瞎整反而比死板按着计划来效果好多了好吧",
+      "自带摸鱼buff，只要有你在的地方大伙就不会被deadline逼疯"
     ],
     0: [
-      "You are extremely spontaneous and live very much in the present moment, embracing life as it comes rather than trying to control it.",
-      "Rigid schedules and detailed plans feel suffocating to you; you thrive when you can act on inspiration in the moment.",
-      "You dislike feeling bound by commitments, and you prefer to keep your options open as much as possible.",
-      "Rules and procedures feel arbitrary to you much of the time, and you would rather find your own way of doing things.",
-      "You have little patience for tedious details, preferring to move quickly rather than perfect every little thing.",
-      "Consistent effort over long periods is challenging for you; you work best in bursts of inspired energy.",
-      "You rarely plan far ahead, preferring to deal with things when they actually happen.",
-      "You bring tremendous flexibility and adaptability, able to adjust instantly when circumstances change unexpectedly.",
-      "You don't worry about meeting other people's expectations; you live according to your own sense of what matters.",
-      "You excel at thinking on your feet and improvising solutions when things don't go according to plan."
+      "纯纯活在当下的快乐仙人，该来的就来老子才不费那个劲去控制",
+      "计划表日程表什么的简直是酷刑！想到啥就立刻干的时候你才最猛",
+      "最讨厌被承诺绑死，能永远留着选项不把话说死才是王道",
+      "那些狗屁规矩流程大多都是瞎扯，老子自己摸索出来的办法才最好用",
+      "磨磨唧唧抠细节真的会死，赶紧完事拉倒别搁那没事找事",
+      "长时间稳定输出？那也太反人类了吧，打鸡血猛冲一波才是你的style",
+      "想那么远干嘛？出事了再说好吗，车到山前必有路",
+      "灵活度点满！天塌下来都能一秒钟立刻调整心态接着整",
+      "别人的期待关我屁事，老子只按自己觉得对的方式活",
+      "计划崩盘的时候才是你表演时刻！临场救场整活全宇宙第一"
     ]
   },
   extraversion: {
     3: [
-      "You gain energy from being around other people, and you thrive in social environments where you can interact and connect.",
-      "You naturally draw attention and energy into a room; people often describe you as enthusiastic and lively.",
-      "You enjoy being the center of attention, and you feel comfortable speaking up and participating actively in groups.",
-      "You think best out loud, often working through ideas by talking them through with other people.",
-      "You make friends easily, and you feel most alive when you are surrounded by people you enjoy spending time with.",
-      "You prefer action and interaction over quiet reflection, and you become restless when you are alone for too long.",
-      "You express your thoughts and feelings openly, and you appreciate when others are equally direct with you.",
-      "You actively seek out social opportunities, and you rarely turn down an invitation to spend time with people.",
-      "You have a wide circle of acquaintances and friends, and you enjoy maintaining connections with many different people.",
-      "You bring energy and enthusiasm to groups, often helping others feel more comfortable and engaged."
+      "跟人待在一起越久越精神！人越多越嗨，社交场就是你的充电仓",
+      "自带人形小太阳buff，只要你一进场整个房间气氛瞬间就活过来了",
+      "站C位完全没在怕的，人越多反而越兴奋，当众讲话什么的根本不叫事",
+      "脑回路就是得边逼逼边转，跟人唠着唠着就把思路捋明白了",
+      "认识新朋友跟喝水一样简单，被喜欢的人围着的时候你整个人都在发光",
+      "让你一个人闷着简直是酷刑，没人说话半小时就开始浑身难受",
+      "心里有啥就直接说，最烦别人跟你打哑谜绕弯子",
+      "只要有局必冲！天塌下来都不能耽误跟大伙凑一块玩",
+      "通讯录好友能拉出一长串，跟啥样的人都能唠上两句",
+      "永远是暖场那个活宝，有你在的地方绝对不会有人尴尬冷场"
     ],
     2: [
-      "You enjoy social interaction and are comfortable in groups, but you also value your quiet time alone.",
-      "You can be the life of the party when you want to be, though you don't always feel the need to be the center of attention.",
-      "You balance thinking things through internally and talking ideas out with others, using both approaches effectively.",
-      "You make friends reasonably easily, though you also value your close, deep relationships more than casual ones.",
-      "You enjoy going out and being social, but you also need time to recharge afterwards.",
-      "You are comfortable speaking up in groups, though you also enjoy listening when others have something valuable to say.",
-      "You express yourself openly when you feel comfortable, though you don't always share everything with everyone.",
-      "You have a good mix of social activities and quiet time, and you appreciate both for different reasons.",
-      "You enjoy meeting new people, but you also feel perfectly content spending an evening alone.",
-      "You adapt well to both social situations and quiet environments, feeling comfortable in either."
+      "出去玩也开心，自己宅着也舒服，属于是两边都能爽到的天选之人",
+      "想嗨的时候能当全场最靓的仔，不想抢风头的时候也能安安静静坐角落",
+      "自己闷头想也行，找人唠着捋思路也行，反正咋都能把事整明白",
+      "交朋友倒是不难，但是心里永远分的很清，哪些是真兄弟哪些只是凑数的",
+      "出去浪归浪，浪完了还是得回家自闭回血，不然顶不住",
+      "该说话的时候绝不怂，但是别人讲的有道理的时候也会乖乖当听众",
+      "熟了之后啥都敢说，但是不熟的时候还是会乖乖端着的啦",
+      "社交和独处时间分配的刚刚好，多了少了都不行",
+      "认识新朋友也ok，但是自己在家瘫一晚上也绝对不觉得无聊",
+      "不管是吵死人的酒局还是安安静静看书，你在哪都能待的很舒服"
     ],
     1: [
-      "You prefer smaller, more intimate gatherings over large noisy groups, where you can have deeper conversations.",
-      "You need quiet time alone to recharge your energy after spending time in social situations.",
-      "You are a good listener, and you often observe carefully before speaking up in group settings.",
-      "You think things through internally before sharing your thoughts, preferring to be clear before you speak.",
-      "You have a small circle of very close friends that you value deeply, rather than a large number of casual acquaintances.",
-      "You dislike being the center of attention, and you would rather let others take the spotlight in group situations.",
-      "You are somewhat reserved when you first meet people, though you open up warmly once you get to know someone well.",
-      "You express yourself thoughtfully and carefully, rather than sharing every thought that comes to mind.",
-      "You enjoy social interaction in moderation, but too much of it leaves you feeling drained.",
-      "You bring a calm, thoughtful presence to groups that helps create space for quieter voices to be heard."
+      "比起吵死人的大场子，还是两三好友凑一块唠真心话最舒服",
+      "出门浪完必须得自己关起门来自闭回血，不然电量直接见底",
+      "超级会听人说话，大伙瞎吵的时候你永远在旁边默默观察清楚了才开口",
+      "脑子没捋明白之前绝对不会瞎逼逼，想清楚了才会说出口",
+      "朋友不需要多，有两三个能掏心窝子的就够了，那些酒肉朋友没意思",
+      "千万不要让老子站C位！求求你们把聚光灯往别人那边照谢谢",
+      "刚认识的时候看起来安安静静的，熟了之后才会露出神经病真面目",
+      "说话都会过脑子，不会想到啥就叭叭往外说",
+      "适当社交可以接受，但是连续出门超过两天就会开始想找个洞钻进去",
+      "自带温柔buff，有你在的地方连最内向的人都会敢开口说话"
     ],
     0: [
-      "You are deeply introspective and gain your energy from quiet time alone, where you can reflect and process your thoughts.",
-      "Large social gatherings feel overwhelming to you, and you strongly prefer one-on-one or very small group interactions.",
-      "You have an extremely rich inner world, and you often find more meaning in your own thoughts than in external stimulation.",
-      "You think very carefully before speaking, and you rarely share opinions or ideas unless you have thoroughly considered them.",
-      "You value deep, meaningful connections with a very small number of people far more than casual relationships.",
-      "Being the center of attention makes you deeply uncomfortable, and you actively avoid situations where this might happen.",
-      "You are very reserved around people you don't know well, and it takes time for others to get to know the real you.",
-      "You process experiences internally, often needing time alone after events to understand how you feel about them.",
-      "You observe far more than you speak, and you notice subtle details about people and situations that others miss.",
-      "You bring depth and thoughtful perspective to every interaction, even when you are saying very little."
+      "纯纯内芯供电型，只有一个人安安静静待着的时候才是真正在充电",
+      "人多的地方简直是精神污染，要么一对一要么直接别叫我谢谢",
+      "脑子里的小世界精彩到爆炸，自己跟自己玩比跟外面瞎混有意思一万倍",
+      "说话之前已经在脑子里翻来覆去想了八百遍了，没捋明白绝对不会开口",
+      "这辈子有一两个真正懂你的人就够了，乱七八糟的人脉什么的全是垃圾",
+      "只要有人往我这边看一眼我当场原地去世，求求你们全都不要注意到我",
+      "不熟的时候看起来像个哑巴，能走进你内心的人这辈子都没几个",
+      "发生什么事都得先自己闷着消化好久，当场是绝对不会有反应的",
+      "全程不说话但是全场所有人的小动作小表情你全都看在眼里",
+      "就算全程坐在角落一句话不说，你身上那份安静的气场也比所有人都耀眼"
     ]
   },
   agreeableness: {
     3: [
-      "You naturally prioritize harmony in relationships, going out of your way to ensure that everyone feels heard and respected.",
-      "You have a remarkable ability to see things from other people's perspectives, even when you disagree with them.",
-      "People trust you because they know you will always consider their feelings and treat them with kindness.",
-      "You go out of your way to help others, and you find great satisfaction in supporting the people around you.",
-      "You avoid confrontation whenever possible, preferring to find solutions that work for everyone involved.",
-      "You are exceptionally forgiving and rarely hold grudges, believing that people deserve second chances.",
-      "You naturally cooperate with others, and you work best in teams where everyone is working toward a shared goal.",
-      "You assume the best about people until proven otherwise, and you give others the benefit of the doubt generously.",
-      "You are highly empathetic, and you can often tell when someone is upset even before they say anything.",
-      "You bring compassion and understanding to every interaction, making people feel safe and valued around you."
+      "天生和平使者，拼了命也要让所有人都舒服，绝对不会让任何人被冷落",
+      "就算跟人吵翻了也能站在对方那边想问题，共情能力强到离谱",
+      "所有人都信你，因为大伙都知道你永远会先考虑别人的感受",
+      "能帮的忙绝对不推辞，看着身边人好起来比自己爽了还开心",
+      "能好好说就绝对不吵架，永远在找所有人都能接受的折中办法",
+      "记仇是什么？根本不会，谁还没犯过错啊，差不多就过去了啦",
+      "跟人配合起来巨舒服，团队里有你在永远不会有人闹别扭",
+      "永远先默认别人是好人，哪怕被坑了下次还是愿意先给人一次机会",
+      "共情能力点满！人家还没开口你就已经看出来他不对劲了",
+      "浑身都是软乎乎的气场，只要跟你待在一起所有人都会觉得安心"
     ],
     2: [
-      "You generally get along well with most people, and you try to be cooperative while still standing up for what matters.",
-      "You consider other people's feelings, though you don't let them completely override your own needs and priorities.",
-      "You prefer harmonious relationships, but you are willing to have difficult conversations when they are necessary.",
-      "You help others when you can, though you also know the importance of setting appropriate boundaries.",
-      "You are reasonably trusting of others, while still maintaining a healthy level of caution.",
-      "You will compromise to find solutions that work for everyone, but not at the cost of something that is fundamentally important to you.",
-      "You are generally forgiving, though there are some lines that you will not cross twice.",
-      "You enjoy working cooperatively in teams, but you are also comfortable working independently when needed.",
-      "You see both sides of most disagreements, which helps you find middle ground when conflicts arise.",
-      "You balance compassion and realism appropriately, caring about people while still recognizing their limitations."
+      "跟大部分人都能处的挺好，该配合就配合但是该硬刚的时候也绝不含糊",
+      "会照顾别人感受，但是也绝对不会把自己委屈死当老好人",
+      "能好好相处当然最好，但是真到该撕破脸的时候也绝对不会怂",
+      "能帮肯定帮，但是该划界限的时候也绝不手软，当冤大头是不可能的",
+      "愿意相信别人，但是也没傻到别人说啥都信",
+      "能让一步就让一步，但是触碰底线的事那是半毛钱都没得商量",
+      "一般情况都好说话，但是真踩雷了那咱们就再也别见了",
+      "组队干活挺舒服，自己单干也完全没问题，咋样都行",
+      "吵架永远能站两边都看明白，所以永远是最适合当和事佬的那个",
+      "心软但是不傻，会疼人但是也绝不会惯着傻逼"
     ],
     1: [
-      "You are more concerned with getting things done right than with making sure everyone feels comfortable all the time.",
-      "You believe that honest feedback, even when difficult, is ultimately more helpful than false politeness.",
-      "You are competitive by nature, and you enjoy the challenge of striving to be the best at what you do.",
-      "You are skeptical by default, and you don't automatically assume that people have good intentions.",
-      "You prioritize fairness and justice over harmony, believing that sometimes conflict is necessary to resolve issues properly.",
-      "You don't go out of your way to help others, though you will help when it is clearly the right thing to do.",
-      "You hold people accountable for their actions, and you don't easily forgive repeated mistakes.",
-      "You work well independently, and you sometimes find group collaboration slow and inefficient.",
-      "You say what you think directly, even if it might make someone uncomfortable.",
-      "You bring clarity and directness to situations, helping everyone face reality even when it's difficult."
+      "比起照顾所有人情绪，你更在意能不能把事情真正做好",
+      "比起虚情假意的客气，你觉得哪怕难听但真实的反馈才是真的为别人好",
+      "天生好胜，就喜欢拼尽全力把事情做到最好的那种感觉",
+      "不会默认所有人都是好人，天生带点防备心",
+      "比起表面一团和气，你更看重公平讲道理，该刚的时候绝不和稀泥",
+      "不会主动凑上去当老好人，但真该帮的时候绝不会含糊",
+      "做错事就得承担后果，同样的坑反复踩那可不会轻易放过",
+      "一个人干活效率拉满，有时候反而觉得一群人凑一起磨磨唧唧太墨迹",
+      "有啥说啥不绕弯子，哪怕这话可能会得罪人",
+      "总能把事情掰扯得明明白白，再难接受的现实也能领着大家直面"
     ],
     0: [
-      "You are exceptionally direct and competitive, always striving for excellence even when it creates tension with others.",
-      "You value truth and effectiveness far more than harmony or popularity.",
-      "You don't sugarcoat things; you believe that honest feedback, however uncomfortable, is the only way people improve.",
-      "You are naturally skeptical of other people's motives, and you rarely take things at face value.",
-      "You have no problem with conflict when it is necessary, and you will confront issues directly rather than letting them fester.",
-      "You believe that people should take responsibility for themselves, and you don't go out of your way to protect them from consequences.",
-      "You hold very high standards, both for yourself and for others, and you don't make excuses for poor performance.",
-      "You would rather be respected than liked, and you make decisions based on what is right rather than what is popular.",
-      "You are not easily manipulated, and you see through attempts to appeal to emotion rather than reason.",
-      "You bring unflinching honesty and high standards that push everyone around you to become better."
+      "极其直接极其好胜，为了把事做好哪怕跟人闹僵也无所谓",
+      "好不好听、讨不讨喜根本不重要，有用、是实话才是第一位的",
+      "从来不会给人留面子说好听话——你觉得只有不绕弯子的真话才能让人真的成长",
+      "对别人的动机天生打问号，从来不会别人说啥就信啥",
+      "该吵就吵绝不憋着，有问题当场解决绝对不会留着背后膈应人",
+      "人就得自己对自己负责，不会惯着谁替谁擦屁股",
+      "不管对自己还是对别人标准都拉满，菜就是菜没什么好借口的",
+      "宁愿被人敬着也不要被人喜欢，做事只看对不对，不管会不会讨人嫌",
+      "没人能道德绑架你，打感情牌那一套在你这根本不好使",
+      "你这种毫不留情的坦诚和高要求，其实才是真的能推着身边所有人变强"
     ]
   },
   neuroticism: {
     3: [
-      "You are exceptionally emotionally stable, remaining calm and composed even in highly stressful situations.",
-      "People look to you in crises because they know you will stay grounded and think clearly when everyone else is panicking.",
-      "You rarely dwell on negative feelings, and you bounce back quickly from setbacks and disappointments.",
-      "You handle pressure remarkably well, and stress doesn't seem to affect you the way it does most people.",
-      "You have a naturally optimistic outlook, and you tend to expect that things will work out well in the end.",
-      "You are not easily upset, and you can take criticism or negative feedback without taking it personally.",
-      "You maintain consistent moods, and your emotional state is predictable and reliable to those around you.",
-      "You don't worry excessively about the future, focusing instead on what you can actually control.",
-      "You accept mistakes gracefully, learning from them rather than beating yourself up over them.",
-      "You bring tremendous calm and stability to any group, especially during difficult times."
+      "心态稳得一批，天塌下来你也是最后慌的那个",
+      "出事了所有人第一反应都是看你——因为大家都知道就你还能冷静想办法",
+      "翻篇能力点满，倒霉事过去了就过去了绝对不翻旧账内耗",
+      "压力对你来说基本等于空气，别人要崩的情况你该咋干还是咋干",
+      "天生乐观buff，总觉得最后事情肯定能搞定",
+      "被骂被说也完全不往心里去，就事论事仅此而已",
+      "情绪稳定得可怕，跟你待着永远不用担心不知道哪句话就踩雷",
+      "不会瞎操心没发生的破事，只盯着自己能把控的东西",
+      "做错了就认，改完就拉倒，绝对不会蹲那骂自己一晚上",
+      "只要有你在的场子，再乱的局面也能莫名给人一种安心感"
     ],
     2: [
-      "You are generally emotionally stable, though you naturally feel stress and frustration like everyone else.",
-      "You handle most pressure well, though very difficult situations will understandably affect your mood.",
-      "You bounce back from most setbacks reasonably quickly, though some things take longer to get over.",
-      "You worry occasionally about important things, but you don't let anxiety take over your life.",
-      "You are generally optimistic, while still being realistic about the challenges that might arise.",
-      "You take feedback constructively most of the time, though negative comments can still sting a little.",
-      "Your moods are mostly consistent, though you have good days and bad days like everyone else.",
-      "You can stay calm in most situations, though you have your breaking point like anyone.",
-      "You feel bad when you make mistakes, but you don't dwell on them excessively.",
-      "You balance emotional awareness with stability, feeling things appropriately without being overwhelmed."
+      "整体心态还算稳，当然该烦该炸的时候也跟正常人一样",
+      "大部分压力都扛得住，真遇上大事当然也会崩一下，很合理",
+      "倒霉了一般缓两天也就过去了，当然也有那种要卡挺久的坎",
+      "重要的事当然也会焦虑，但不会被焦虑牵着鼻子走",
+      "整体偏乐观，但也不会傻到觉得啥事都能顺顺利利",
+      "一般挨骂了也能好好听着，当然难听的话该扎心还是会扎一下",
+      "情绪基本没大波动，但是也有犯水逆的倒霉天，谁还没个状态差的时候",
+      "大部分时候都能稳住，当然真逼急了也有炸毛的一天",
+      "做错了当然会难受，但不会抱着这事死磕不放",
+      "该有情绪的时候也有，但是绝不会被情绪冲昏头"
     ],
     1: [
-      "You feel emotions more deeply than most people, and you are more sensitive to stress and negative experiences.",
-      "You tend to worry about things more than the average person, which helps you anticipate problems others miss.",
-      "Setbacks affect you quite strongly, and you need more time than most to recover from disappointments.",
-      "You are highly attuned to emotional signals around you, noticing when the mood in a room shifts.",
-      "You take criticism quite personally, even when it is intended to be constructive.",
-      "Your mood can change noticeably depending on what is happening around you.",
-      "You often think about past mistakes and wonder if you could have done things differently.",
-      "You feel stress more acutely than most people, and you need time to decompress after difficult situations.",
-      "You are very aware of your own emotions, though sometimes they feel like they are controlling you rather than the other way around.",
-      "Your sensitivity gives you remarkable depth of feeling and empathy for what others are going through."
+      "比大部分人都敏感，情绪也重，压力和糟心事对你影响比别人大得多",
+      "比谁都爱瞎琢磨，也正因如此总能提前察觉到别人没发现的坑",
+      "受打击了比一般人缓得慢，得给自己留够时间消化",
+      "对气氛嗅觉拉满，屋里有人不高兴你隔八丈远都能感觉到",
+      "哪怕是好心的批评，听了也会难过好半天",
+      "心情起起伏伏挺明显的，遇到啥事儿脸上真藏不住",
+      "总忍不住翻以前做错的事，一遍遍想当时要是换个做法会不会好点",
+      "特别容易累心，费劲的事结束之后必须得瘫好久回血",
+      "对自己的情绪门儿清，但有时候还是会被情绪带着走",
+      "但也正因为这份敏感，你才能真正共情到别人藏起来的难过"
     ],
     0: [
-      "You experience emotions with exceptional intensity, both positive and negative, and you feel everything very deeply.",
-      "You are extremely sensitive to your environment and to other people's moods, picking up on subtleties no one else notices.",
-      "You worry extensively about possible negative outcomes, which means you are rarely caught off guard by problems.",
-      "Stress affects you strongly, and you need significant time to recover after difficult experiences.",
-      "You often replay past events in your mind, analyzing what happened and how it could have been different.",
-      "Your mood can shift quite rapidly, as you respond intensely to what is happening in the moment.",
-      "You take things very personally, and you are deeply affected by criticism or rejection.",
-      "You feel anxiety about the future more than most people, which drives you to prepare extremely carefully.",
-      "Negative experiences stay with you for a long time, though positive ones also leave much deeper impressions.",
-      "Your extraordinary sensitivity gives you a unique depth of understanding and compassion that very few people possess."
+      "不管好的坏的，所有情绪你都是十倍深度在感受",
+      "对环境对别人的心情敏感到离谱，没人注意到的细节你全能接住",
+      "会把所有最坏的情况都提前想一遍，所以真出事的时候永远只有你有准备",
+      "压力上来的时候真的会被压垮，必须要很长很长的时间才能缓过来",
+      "脑子里像有个回放机，过去的事会翻来覆去拆碎了想",
+      "心情变脸比翻书还快，上一秒还笑下一秒可能就沉下去了",
+      "别人随便一句话你能琢磨三天，被否定一次会记好久好久",
+      "对未来的焦虑比谁都重，但也正因如此你永远是准备最充分的那个",
+      "不好的事会记很久，但反过来，好的回忆也会在你心里烫下更深的印子",
+      "这份常人没有的敏感，也给了你别人永远学不来的温柔和共情力"
     ]
   },
   decisiveness: {
     3: [
-      "You make decisions quickly and confidently, trusting your judgment once you have enough information.",
-      "Once you decide on something, you stick with it and move forward without second-guessing yourself.",
-      "You are comfortable making decisions even when you don't have complete information.",
-      "People look to you to make the call when others are stuck in indecision.",
-      "You act decisively, believing that a good decision made now is better than a perfect decision made too late.",
-      "You trust your intuition, and you are able to synthesize information rapidly to reach conclusions.",
-      "You rarely look back after making a decision, focusing instead on executing it well.",
-      "You thrive in situations that require quick thinking and immediate action.",
-      "You take responsibility for your decisions, accepting the consequences whatever they may be.",
-      "You bring clarity and momentum to groups, cutting through debate to move things forward."
+      "拿主意快准狠，信息够了当场就拍板，绝不磨磨唧唧",
+      "决定了就头也不回往前冲，从来不会事后又开始纠结",
+      "信息不全也敢拍板，从来不会等什么万无一失",
+      "所有人都卡在那拿不定主意的时候，大家只会等你开口",
+      "宁愿现在做个八成对的决定，也不要等半个月后那个完美的马后炮",
+      "直觉准得离谱，乱七八糟的信息扫一眼立刻就能抓住重点",
+      "选了就不后悔，落地执行比啥都重要",
+      "就喜欢要立刻拍板的急活，越慌你越清醒",
+      "自己做的决定自己扛，不管结果咋样绝不甩锅",
+      "只要有你在，场子永远不会卡在那没完没了扯皮"
     ],
     2: [
-      "You balance careful consideration with appropriate speed when making decisions.",
-      "You gather enough information to feel confident, but you don't over-analyze when action is needed.",
-      "You usually make decisions in reasonable time, though you will take extra time for very important choices.",
-      "You are comfortable deciding when necessary, but you don't rush things unnecessarily.",
-      "You trust your judgment most of the time, though you will reconsider if new information comes to light.",
-      "You think through important decisions properly, but you avoid getting stuck in endless analysis.",
-      "Once you decide on something you generally stick with it, though you remain open to adjusting if needed.",
-      "You handle both quick decisions and careful deliberation appropriately depending on the situation.",
-      "You take responsibility for your choices, while still being willing to acknowledge when you got it wrong.",
-      "You balance speed and thoughtfulness well, adapting your approach to match what is required."
+      "该快的时候快，该琢磨的时候也会好好琢磨，不会走极端",
+      "会先摸够基本信息，但该动的时候绝对不会死磕细节",
+      "大部分时候做决定都挺痛快的，真遇上大事当然也会多想想",
+      "该拍板的时候绝不怂，但也不会没事瞎赶时间",
+      "大部分时候信自己的判断，但是有新证据该改也会改",
+      "重要的事当然会好好想，但绝对不会陷进无限纠结里出不来",
+      "定了就基本不会变，但也不是死脑筋，该调整当然会调整",
+      "该快能快，该慢能慢，完全看事情本身",
+      "自己选的路自己扛，但真错了也大大方方认",
+      "快慢拿捏得刚刚好，不会莽也不会怂"
     ],
     1: [
-      "You prefer to think decisions through carefully, considering all angles before committing to a choice.",
-      "You dislike feeling rushed when making important decisions, and you will take the time you need.",
-      "You consider multiple possibilities thoroughly, which helps you avoid mistakes that others might miss.",
-      "You often second-guess yourself even after making a decision, wondering if there was a better option.",
-      "You are very uncomfortable making decisions when you don't have complete information.",
-      "You would rather take extra time to make the right decision than rush into something you might regret.",
-      "You seek out multiple opinions before making important choices, wanting to see all possible perspectives.",
-      "You notice potential problems and downsides that more decisive people often overlook.",
-      "You avoid making final commitments until you feel absolutely confident that you have considered everything.",
-      "Your thoughtfulness helps you make exceptionally high-quality decisions when given enough time."
+      "做决定前必须把方方面面都想一遍，绝对不肯随便拍板",
+      "最烦别人催你做重大决定，该花的时间半分都不能少",
+      "会把所有可能性挨个过一遍，也正因如此很少踩别人会踩的坑",
+      "哪怕已经定下来了，还是忍不住琢磨会不会有更好的选项",
+      "信息没摸全就让你做决定？那简直是要你命",
+      "宁愿多花三天想明白，也不要急着选了之后后悔半年",
+      "做重要决定前一定会问遍所有人的意见，每个角度都要看到",
+      "总能看见那些急性子根本注意不到的风险和隐患",
+      "没彻底想通之前绝对不会把话说死",
+      "只要给够你时间，你拿出来的决定质量能甩别人八条街"
     ],
     0: [
-      "You are exceptionally thoughtful and thorough, considering every possible angle before making even minor decisions.",
-      "You absolutely refuse to be rushed into important choices, regardless of pressure from others.",
-      "You see every possible outcome and consequence, which means you almost never make careless mistakes.",
-      "You will gather information indefinitely if allowed, believing you can never know too much before deciding.",
-      "You are extremely comfortable with ambiguity and waiting, even when everyone else is pushing for a decision.",
-      "You constantly re-evaluate past decisions, always looking for ways things could have been improved.",
-      "You consider perspectives that most people would never even think to look at.",
-      "You hate closing off options, and you will keep possibilities open for as long as humanly possible.",
-      "You notice risks and dangers that no one else sees, which makes you exceptionally good at avoiding problems.",
-      "When you finally do make a decision, it is almost always extraordinarily well considered and robust."
+      "谨慎到骨子里，哪怕屁大点事也要把所有角度全捋一遍",
+      "不管别人怎么催，该想多久就想多久，天王老子来也不好使",
+      "所有可能的结果所有连锁反应你全能想到，所以几乎从来不会犯低级错误",
+      "只要没人催，你能永远收集信息下去——毕竟知道的永远不够多",
+      "所有人都在那急着拍板的时候，只有你能沉得住气继续等",
+      "哪怕已经定了的事，也会忍不住回头想有没有能优化的地方",
+      "能想到绝大多数人这辈子都不会考虑到的角度",
+      "最讨厌把路走死，能留的活口绝对会给你留到最后一秒",
+      "所有人都看不见的坑，只有你能提前发现绕开",
+      "虽然慢，但只要是你最后拍板的事，那基本已经稳得不能再稳了"
     ]
   }
 };
 
 // --------------------------
-// Modifier System - adds natural nuance variations
+// 修饰词库 - 用来让话术更自然不生硬
 // --------------------------
 const MODIFIERS = {
   intensity: [
-    "tend to",
-    "often",
-    "typically",
-    "generally",
-    "usually",
-    "frequently",
-    "consistently",
-    "reliably",
-    "naturally",
-    "instinctively"
+    "往往",
+    "经常",
+    "通常",
+    "一般来说",
+    "大部分时候",
+    "动不动就",
+    "一贯",
+    "靠得住的",
+    "天生就",
+    "本能反应是"
   ],
   qualification: [
-    "for the most part",
-    "when it matters most",
-    "in most situations",
-    "under normal circumstances",
-    "when you are at your best",
-    "more often than not",
-    "by default",
-    "as a general rule",
-    "when you are comfortable",
-    "given the chance"
+    "差不多是这样",
+    "真遇上事的时候",
+    "大部分情况",
+    "正常状态下",
+    "状态好的时候",
+    "十次有八次",
+    "默认是这样",
+    "通常来讲",
+    "放松的时候",
+    "有得选的话"
   ],
   perspective: [
-    "Interestingly,",
-    "Notably,",
-    "What stands out is that",
-    "One observation is that",
-    "It is also true that",
-    "In addition,",
-    "Furthermore,",
-    "Importantly,",
-    "On the other hand,",
-    "At the same time,"
+    "有意思的是",
+    "值得一提的是",
+    "最绝的是",
+    "还有一点就是",
+    "另外还有",
+    "而且吧",
+    "还有啊",
+    "重点是",
+    "不过反过来讲",
+    "但话说回来"
   ]
 };
 
 // --------------------------
-// Connector System - smooth natural transitions between points
+// 连接词库 - 让每条描述之间接得自然不生硬
 // --------------------------
 const CONNECTORS = [
-  "At the same time,",
-  "Meanwhile,",
-  "In contrast,",
-  "Complementing this,",
-  "Alongside this,",
-  "On a different note,",
-  "Adding to this,",
-  "Whereas,",
-  "Balancing this,",
-  "In keeping with this,",
-  "Consistent with this,",
-  "Similarly,",
-  "On the other side,"
+  "但同时啊",
+  "另一边呢",
+  "反过来讲",
+  "刚好互补的是",
+  "配合这点的是",
+  "说句题外话",
+  "还有啊",
+  "而反过来",
+  "但有意思的是刚好平衡了这点的是",
+  "跟这点一致的是",
+  "很搭的是",
+  "同样的",
+  "另外一面是"
 ];
 
 // --------------------------
-// Opening and Closing phrase banks
+// 开头和结尾话术库
 // --------------------------
 const OPENINGS = [
-  "Your personality profile reveals a unique combination of traits that shape how you experience the world and interact with others.",
-  "Looking at your responses, several clear patterns emerge that describe your characteristic approach to life.",
-  "Your answers paint a rich and nuanced picture of who you are and what makes you unique.",
-  "Across all the dimensions we measured, the following consistent patterns stand out in your profile:",
-  "Based on your responses, here is what we can observe about your personality:",
-  "Your answers reveal a distinct personality structure that influences how you think, feel and behave.",
-  "The pattern of your responses indicates the following core tendencies in your personality:"
+  "从你的回答里能看出来挺有意思的性格组合，这些特质拼成了现在的你",
+  "看完你填的东西，几个非常鲜明的 pattern 已经出来了",
+  "你的答案拼出了一个特别鲜活的人，很多细节都太准了",
+  "我们测的所有维度里，这些是在你身上最明显的特征：",
+  "根据你选的答案，大概是这么个情况：",
+  "你的选择藏着非常稳定的行为模式，你平时大概就是这么想事做事的：",
+  "从你的回答里能总结出这么几个核心的习惯："
 ];
 
 const CLOSINGS = [
-  "This unique combination is what makes you who you are - there is no one else quite like you.",
-  "Remember that these are tendencies, not rules - you always have the freedom to choose how you act in any moment.",
-  "Every trait has its strengths and challenges, and the most important thing is to understand and work with your natural tendencies.",
-  "Self awareness is the first step toward growth; understanding these patterns can help you bring out the best in yourself.",
-  "This profile is just a starting point - only you know the full complexity and depth of who you really are.",
-  "Your unique balance of traits gives you strengths that no one else can bring in quite the same way."
+  "就是这些奇奇怪怪的特质拼出了独一无二的你，全世界找不到第二个同款",
+  "记住哦这些都只是倾向，不是框死的规则——任何时候你想怎么选都可以",
+  "没有好坏性格，每种特质都有它厉害的地方和难受的地方，接受自己本来的样子就好",
+  "看懂自己是变好的第一步，搞懂这些模式之后，你就知道该怎么把自己的优势用出来了",
+  "这报告也就图一乐，真正的你到底有多复杂，只有你自己才知道",
+  "你身上这些特质的配比刚刚好，有些东西只有你能带来，别人学不来的"
 ];
 
 // --------------------------
