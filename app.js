@@ -34,11 +34,20 @@ function answer(value) {
   answers.push(value);
   currentQuestion++;
 
-  if (currentQuestion >= QUESTIONS.length) {
-    finishTest();
-  } else {
-    renderQuestion();
-  }
+  // 题目切换动画
+  const questionPage = document.getElementById('question-page');
+  questionPage.style.opacity = '0';
+  questionPage.style.transform = 'translateX(40px)';
+
+  setTimeout(() => {
+    if (currentQuestion >= QUESTIONS.length) {
+      finishTest();
+    } else {
+      renderQuestion();
+      questionPage.style.opacity = '1';
+      questionPage.style.transform = 'translateX(0)';
+    }
+  }, 250);
 }
 
 function finishTest() {
