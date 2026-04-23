@@ -185,22 +185,52 @@ const QuizStateMachine = {
     renderResult() {
         const resultContainer = document.getElementById('result-container');
         const result = getResultDescription(this.data.score);
+        const dimensionScores = calculateDimensionScores(this.data.answers);
 
         resultContainer.innerHTML = `
             <div class="result-card animate-fade-in">
-                <div class="score-display">
-                    <div class="score-value">${this.data.score}</div>
-                    <div class="score-label">得分</div>
+                <div class="score-header">
+                    <div class="score-display">
+                        <div class="score-value">${this.data.score}</div>
+                        <div class="score-label">综合得分</div>
+                    </div>
+                    <div class="level-badge">
+                        <span class="level-text">${result.level}</span>
+                    </div>
                 </div>
+
+                <div class="radar-chart-container">
+                    <canvas id="radar-chart" width="300" height="300"></canvas>
+                </div>
+
                 <div class="result-description">
                     <h4>${result.title}</h4>
                     <p>${result.description}</p>
                 </div>
+
+                <div class="dimension-scores">
+                    ${dimensionScores.map((score, index) => `
+                        <div class="dimension-item">
+                            <span class="dimension-name">${RadarChartComponent.dimensions[index]}</span>
+                            <div class="dimension-bar">
+                                <div class="dimension-fill" style="width: ${score}%"></div>
+                            </div>
+                            <span class="dimension-score">${score}</span>
+                        </div>
+                    `).join('')}
+                </div>
+
                 <button id="restart-btn" class="restart-btn">重新测试</button>
             </div>
         `;
 
+        // 初始化雷达图
+        setTimeout(() => {
+            RadarChartComponent.init('radar-chart', dimensionScores);
+        }, 100);
+
         document.getElementById('restart-btn').addEventListener('click', () => {
+            RadarChartComponent.destroy();
             this.transitionTo(this.states.WELCOME);
         });
     },
