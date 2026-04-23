@@ -25,7 +25,7 @@ function loadHtml2Canvas() {
  * @param {Object} data - 要分享的数据对象
  * @returns {string} 分享链接
  */
-export function encodeShareLink(data) {
+function encodeShareLink(data) {
     try {
         const jsonString = JSON.stringify(data);
         const base64 = btoa(unescape(encodeURIComponent(jsonString)));
@@ -42,7 +42,7 @@ export function encodeShareLink(data) {
  * 解码分享链接中的base64数据
  * @returns {Object|null} 解码后的数据
  */
-export function decodeShareLink() {
+function decodeShareLink() {
     try {
         const urlParams = new URLSearchParams(window.location.search);
         const shareData = urlParams.get('share');
@@ -64,7 +64,7 @@ export function decodeShareLink() {
  * @param {HTMLElement} element - 要截图的DOM元素
  * @returns {Promise<string>} 图片DataURL
  */
-export async function generateImage(element) {
+async function generateImage(element) {
     try {
         await loadHtml2Canvas();
 
@@ -88,7 +88,7 @@ export async function generateImage(element) {
  * @param {string} dataUrl - 图片DataURL
  * @param {string} filename - 文件名
  */
-export function downloadImage(dataUrl, filename = 'assessment-result.png') {
+function downloadImage(dataUrl, filename = 'assessment-result.png') {
     const link = document.createElement('a');
     link.download = filename;
     link.href = dataUrl;
@@ -100,7 +100,7 @@ export function downloadImage(dataUrl, filename = 'assessment-result.png') {
  * @param {string} text - 要复制的文本
  * @returns {Promise<boolean>} 是否成功
  */
-export async function copyToClipboard(text) {
+async function copyToClipboard(text) {
     try {
         await navigator.clipboard.writeText(text);
         return true;
@@ -115,7 +115,7 @@ export async function copyToClipboard(text) {
  * @param {HTMLElement} container - 按钮容器
  * @param {Function} getDataFn - 获取分享数据的回调函数
  */
-export function initShareButtons(container, getDataFn) {
+function initShareButtons(container, getDataFn) {
     // 创建分享按钮组
     const shareContainer = document.createElement('div');
     shareContainer.className = 'share-buttons';

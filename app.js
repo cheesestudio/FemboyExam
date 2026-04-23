@@ -4,7 +4,6 @@
  * 包含进度条、页面切换动画、答题逻辑
  */
 
-import { initShareButtons, decodeShareLink } from './share.js';
 
 const QuizStateMachine = {
     // 状态定义
