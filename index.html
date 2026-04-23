@@ -3,66 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="男娘指数测试 - 趣味性格测试">
+    <meta name="theme-color" content="#FFB5BA">
     <title>男娘指数测试 ✨</title>
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://html2canvas.hertzen.com">
+
+    <!-- Critical CSS first -->
+    <style>
+        /* Critical above-the-fold styles */
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{min-height:100vh;background:linear-gradient(135deg,#FFB5BA 0%,#FFEAA7 50%,#A0D2EB 100%);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+        .page{opacity:0;transform:translateY(20px);transition:opacity 0.4s ease,transform 0.4s ease;pointer-events:none;position:absolute;inset:0}
+        .page.active{opacity:1;transform:translateY(0);pointer-events:auto;position:relative}
+        .hidden{display:none}
+    </style>
+
+    <!-- External resources -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script src="questions.js"></script>
-    <script src="scoring.js"></script>
-    <script src="radar-chart.js"></script>
-    <script type="module" src="share.js"></script>
-    <script type="module" src="app.js"></script>
     <link rel="stylesheet" href="style.css">
+
+    <!-- Defer non-critical scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js" defer></script>
+    <script src="questions.js" defer></script>
+    <script src="scoring.js" defer></script>
+    <script src="radar-chart.js" defer></script>
+    <script type="module" src="share.js" defer></script>
+    <script type="module" src="app.js" defer></script>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-macaron-pink via-macaron-yellow to-macaron-blue">
-    <div class="container mx-auto px-4 py-8">
+<body class="min-h-screen">
+    <a href="#main-content" class="skip-link">跳过导航</a>
+
+    <div class="container mx-auto px-4 py-8 max-w-2xl min-h-screen flex flex-col">
         <!-- 头部导航 -->
-        <header class="mb-8">
-            <h1 class="text-4xl font-bold text-center text-white drop-shadow-lg">📊 数据可视化报表生成器</h1>
-            <p class="text-center text-white/80 mt-2">一键生成专业美观的数据报告</p>
+        <header role="banner" class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-center text-white drop-shadow-lg">✨ 男娘指数测试</h1>
+            <p class="text-center text-white/90 mt-2 text-sm md:text-base">趣味性格测试 - 10道题了解你的属性</p>
         </header>
 
         <!-- 主内容区域 -->
-        <main class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <!-- 左侧控制面板 -->
-            <aside class="lg:col-span-3 bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
-                <h2 class="text-xl font-semibold mb-4 text-gray-700">数据配置</h2>
-                <!-- 控制面板占位 -->
-                <div class="space-y-4">
-                    <p class="text-gray-500 text-sm">配置项区域</p>
-                </div>
-            </aside>
+        <main id="main-content" role="main" class="flex-grow relative">
 
-            <!-- 中间预览区域 -->
-            <section class="lg:col-span-6 bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
-                <h2 class="text-xl font-semibold mb-4 text-gray-700">报表预览</h2>
-                <!-- 图表预览区域 -->
-                <div id="chart-container" class="min-h-96 bg-white/50 rounded-xl p-4">
-                    <canvas id="mainChart"></canvas>
+            <!-- 欢迎页面 -->
+            <section id="welcome-page" class="page active bg-white/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-xl">
+                <div class="text-center space-y-6">
+                    <div class="text-6xl mb-4">🌸</div>
+                    <h2 class="text-2xl font-semibold text-gray-800">欢迎来到测试</h2>
+                    <p class="text-gray-600">通过简单的10道题，测试你的萌系属性指数</p>
+                    <p class="text-gray-500 text-sm">所有数据仅保存在本地，不会上传到服务器</p>
+
+                    <button id="start-btn" class="btn btn-primary w-full md:w-auto min-h-[48px] px-8 py-3 mt-6">
+                        开始测试
+                    </button>
                 </div>
             </section>
 
-            <!-- 右侧导出面板 -->
-            <aside class="lg:col-span-3 bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
-                <h2 class="text-xl font-semibold mb-4 text-gray-700">导出选项</h2>
-                <!-- 导出面板占位 -->
-                <div class="space-y-4">
-                    <p class="text-gray-500 text-sm">导出功能区域</p>
+            <!-- 答题页面 -->
+            <section id="question-page" class="page hidden bg-white/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-xl">
+                <div class="progress-bar-container mb-6">
+                    <div class="progress-bar bg-gray-200 rounded-full h-2 overflow-hidden">
+                        <div id="progress-bar" class="progress-fill bg-macaron-pink h-full transition-all duration-500 ease-out" style="width: 0%"></div>
+                    </div>
+                    <p id="progress-text" class="text-sm text-gray-500 mt-2 text-center"></p>
                 </div>
-            </aside>
+
+                <div id="question-container" class="space-y-6"></div>
+            </section>
+
+            <!-- 结果页面 -->
+            <section id="result-page" class="page hidden bg-white/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-xl">
+                <div id="result-container" class="space-y-6"></div>
+            </section>
+
         </main>
 
         <!-- 页脚 -->
-        <footer class="mt-12 text-center text-white/70 text-sm">
-            <p>© 2026 数据可视化报表生成器 | 马卡龙配色主题</p>
+        <footer role="contentinfo" class="mt-12 text-center text-white/70 text-sm">
+            <p>© 2026 男娘指数测试 | 仅供娱乐</p>
         </footer>
     </div>
-
-    <script>
-        // 基础初始化脚本
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('应用初始化完成');
-        });
-    </script>
 </body>
 </html>
