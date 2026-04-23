@@ -112,21 +112,7 @@ const QuizStateMachine = {
      */
     renderCurrentQuestion() {
         const question = QUESTIONS[this.data.currentQuestionIndex];
-        const container = document.getElementById('question-container');
-
-        container.innerHTML = `
-            <div class="question-card animate-fade-in">
-                <h3 class="question-text">${question.text}</h3>
-                <div class="options-list">
-                    ${question.options.map((option, index) => `
-                        <button class="option-btn" data-index="${index}">
-                            <span class="option-label">${String.fromCharCode(65 + index)}</span>
-                            <span class="option-text">${option}</span>
-                        </button>
-                    `).join('')}
-                </div>
-            </div>
-        `;
+        document.getElementById('question-text').textContent = question.text;
 
         // 绑定选项点击事件
         container.querySelectorAll('.option-btn').forEach(btn => {
