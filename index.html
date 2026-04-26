@@ -3,83 +3,1080 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="男娘指数测试 - 趣味性格测试">
-    <meta name="theme-color" content="#FFB5BA">
-    <title>男娘指数测试 ✨</title>
+    <meta name="description" content="男娘指数测试 - 探索你的内在维度，专业性格测试，六大维度深度分析">
+    <meta name="theme-color" content="#5B3A9E">
+    <title>男娘指数测试 - 发现你的内在光谱</title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "男娘指数测试",
+      "description": "探索你的内在维度 - 专业性格测试，六大维度深度分析",
+      "applicationCategory": "LifestyleApplication",
+      "operatingSystem": "Any"
+    }
+    </script>
 
+    <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <!-- Google Fonts: Poppins (modern, clean) + Playfair Display (elegant headings) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{min-height:100vh;background:linear-gradient(135deg,#FFB5BA 0%,#FFEAA7 50%,#A0D2EB 100%);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
-        .page{opacity:0;transform:translateY(30px);transition:opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);pointer-events:none;position:absolute;inset:0}
-        .page.active{opacity:1;transform:translateY(0);pointer-events:auto}
-        .page.fade-out{opacity:0;transform:translateY(-20px);transition:opacity 0.4s ease, transform 0.4s ease;}
-        button{min-height:56px;transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);}
-        button:active{transform: scale(0.96);}
+        /* ============================================
+           16P-INSPIRED DESIGN SYSTEM
+           ============================================ */
+        :root {
+            /* Primary Purple Theme (16Personalities style) */
+            --color-primary: #5B3A9E;
+            --color-primary-light: #7B5ABF;
+            --color-primary-dark: #4A2E80;
+            --color-secondary: #8B5CF6;
+            --color-accent: #A855F7;
+            --color-gradient-start: #5B3A9E;
+            --color-gradient-mid: #7C3AED;
+            --color-gradient-end: #A855F7;
+
+            /* Neutral Colors */
+            --bg-light: #F8F7FC;
+            --bg-card: #FFFFFF;
+            --text-primary: #1F1F2E;
+            --text-secondary: #5C5C6B;
+            --text-muted: #8E8E99;
+            --border-color: #E8E6F0;
+            --shadow-sm: 0 2px 8px rgba(91, 58, 158, 0.08);
+            --shadow-md: 0 8px 32px rgba(91, 58, 158, 0.12);
+            --shadow-lg: 0 16px 64px rgba(91, 58, 158, 0.16);
+            --shadow-glow: 0 0 40px rgba(139, 92, 246, 0.3);
+
+            /* Dimension Colors (6 facets) */
+            --dim-soft: #E966A0;
+            --dim-shy: #60A5FA;
+            --dim-feminine: #F472B6;
+            --dim-voice: #A78BFA;
+            --dim-identity: #7C3AED;
+            --dim-action: #8B5CF6;
+
+            /* Spacing & Typography */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* ============================================
+           BASE & RESET
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            * {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-light);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ============================================
+           BACKGROUND DECORATION
+           ============================================ */
+        .bg-decoration {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .bg-blob-1 {
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent));
+            top: -200px;
+            right: -200px;
+            animation-delay: 0s;
+        }
+
+        .bg-blob-2 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, var(--color-secondary), var(--color-primary-dark));
+            bottom: -150px;
+            left: -150px;
+            animation-delay: -5s;
+        }
+
+        .bg-blob-3 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, var(--color-accent), var(--dim-feminine));
+            top: 50%;
+            left: 10%;
+            animation-delay: -10s;
+            opacity: 0.2;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(30px, -30px) rotate(5deg); }
+            50% { transform: translate(-20px, 20px) rotate(-5deg); }
+            75% { transform: translate(20px, 10px) rotate(3deg); }
+        }
+
+        /* ============================================
+           MAIN CONTAINER
+           ============================================ */
+        #app {
+            position: relative;
+            z-index: 1;
+            max-width: 680px;
+            margin: 0 auto;
+            padding: var(--space-xl) var(--space-md);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ============================================
+           PAGE TRANSITIONS
+           ============================================ */
+        .page {
+            opacity: 0;
+            transform: scale(0.95) translateY(20px);
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            max-width: 680px;
+        }
+
+        .page.active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: all;
+            position: relative;
+        }
+
+        .page.fade-out {
+            opacity: 0;
+            transform: scale(1.02);
+        }
+
+        /* ============================================
+           WELCOME PAGE
+           ============================================ */
+        .welcome-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-3xl);
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent), var(--dim-feminine));
+            background-size: 200% 100%;
+            animation: gradientSlide 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientSlide {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Test Icon / Badge */
+        .test-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto var(--space-lg);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border-radius: 24px;
+            box-shadow: var(--shadow-md);
+            animation: badgePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { transform: scale(1); box-shadow: var(--shadow-md); }
+            50% { transform: scale(1.05); box-shadow: var(--shadow-glow); }
+        }
+
+        .test-badge svg {
+            width: 40px;
+            height: 40px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .welcome-card h1 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-primary-dark);
+            margin-bottom: var(--space-md);
+            letter-spacing: -0.02em;
+        }
+
+        .welcome-card h1 .subtitle {
+            display: block;
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            font-family: var(--font-body);
+            margin-top: var(--space-sm);
+        }
+
+        .welcome-card .intro-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-xl);
+            line-height: 1.7;
+        }
+
+        /* Dimension Tags */
+        .dimension-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xl);
+        }
+
+        .dim-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .dim-tag .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .dim-tag.soft .dot { background: var(--dim-soft); }
+        .dim-tag.shy .dot { background: var(--dim-shy); }
+        .dim-tag.feminine .dot { background: var(--dim-feminine); }
+        .dim-tag.voice .dot { background: var(--dim-voice); }
+        .dim-tag.identity .dot { background: var(--dim-identity); }
+        .dim-tag.action .dot { background: var(--dim-action); }
+
+        /* Start Button */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: 16px 48px;
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--color-secondary), var(--color-accent));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+
+        .btn-primary:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-primary span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary svg {
+            width: 20px;
+            height: 20px;
+            stroke: white;
+            stroke-width: 2.5;
+            fill: none;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s;
+        }
+
+        .btn-primary:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* ============================================
+           QUESTION PAGE
+           ============================================ */
+        .question-wrapper {
+            width: 100%;
+        }
+
+        /* Progress Section */
+        .progress-section {
+            margin-bottom: var(--space-xl);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .progress-counter {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            background: rgba(91, 58, 158, 0.1);
+            padding: 4px 12px;
+            border-radius: 50px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: progressShine 2s infinite;
+        }
+
+        @keyframes progressShine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Question Card */
+        .question-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            animation: cardSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes cardSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question-number {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-primary);
+            background: rgba(91, 58, 158, 0.1);
+            padding: 6px 14px;
+            border-radius: 50px;
+            margin-bottom: var(--space-lg);
+        }
+
+        .question-text {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.4;
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+        }
+
+        /* Answer Options */
+        .answer-options {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .answer-btn {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+            padding: 20px 24px;
+            background: var(--bg-light);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .answer-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+
+        .answer-btn:hover {
+            border-color: var(--color-primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .answer-btn.selected {
+            border-color: var(--color-primary);
+            background: rgba(91, 58, 158, 0.05);
+            box-shadow: 0 0 0 3px rgba(91, 58, 158, 0.15);
+        }
+
+        .answer-btn:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(91, 58, 158, 0.3);
+        }
+
+        .answer-btn .option-indicator {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.25s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .answer-btn .option-indicator svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--text-muted);
+            stroke-width: 2.5;
+            fill: none;
+            transition: all 0.25s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .answer-btn:hover .option-indicator {
+            border-color: var(--color-primary);
+        }
+
+        .answer-btn:hover .option-indicator svg {
+            stroke: var(--color-primary);
+        }
+
+        .answer-btn.selected .option-indicator {
+            border-color: var(--color-primary);
+            background: var(--color-primary);
+        }
+
+        .answer-btn.selected .option-indicator svg {
+            stroke: white;
+        }
+
+        .answer-btn .option-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            min-width: 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .answer-btn.selected .option-label {
+            color: var(--color-primary);
+        }
+
+        .answer-btn .option-text {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .answer-btn.selected .option-text {
+            color: var(--text-primary);
+        }
+
+        /* ============================================
+           RESULT PAGE
+           ============================================ */
+        .result-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            animation: cardSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Result Header */
+        .result-header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+            padding-bottom: var(--space-xl);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .result-rank-badge {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: var(--space-md);
+        }
+
+        .rank-level {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            line-height: 1;
+            margin-bottom: var(--space-xs);
+        }
+
+        .rank-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .overall-score {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .overall-score strong {
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        /* Radar Chart Section */
+        .radar-section {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-lg);
+            text-align: center;
+        }
+
+        .radar-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: var(--space-lg);
+            background: var(--bg-light);
+            border-radius: var(--radius-lg);
+        }
+
+        .radar-chart {
+            max-width: 320px;
+            width: 100%;
+        }
+
+        /* Dimension Scores */
+        .dimensions-grid {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .dimensions-title {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-lg);
+        }
+
+        .dimension-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+            padding: 16px;
+            background: var(--bg-light);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-md);
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .dimension-item:hover {
+            transform: translateX(4px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .dim-color-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .dim-color-dot.soft { background: var(--dim-soft); }
+        .dim-color-dot.shy { background: var(--dim-shy); }
+        .dim-color-dot.feminine { background: var(--dim-feminine); }
+        .dim-color-dot.voice { background: var(--dim-voice); }
+        .dim-color-dot.identity { background: var(--dim-identity); }
+        .dim-color-dot.action { background: var(--dim-action); }
+
+        .dim-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            min-width: 80px;
+        }
+
+        .dim-bar-container {
+            flex: 1;
+            height: 10px;
+            background: var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .dim-bar {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dim-bar.soft { background: linear-gradient(90deg, var(--dim-soft), #F9A8D4); }
+        .dim-bar.shy { background: linear-gradient(90deg, var(--dim-shy), #60A5FA); }
+        .dim-bar.feminine { background: linear-gradient(90deg, var(--dim-feminine), #F9A8D4); }
+        .dim-bar.voice { background: linear-gradient(90deg, var(--dim-voice), #A78BFA); }
+        .dim-bar.identity { background: linear-gradient(90deg, var(--dim-identity), var(--color-primary)); }
+        .dim-bar.action { background: linear-gradient(90deg, var(--dim-action), var(--color-secondary)); }
+
+        .dim-score {
+            font-weight: 700;
+            color: var(--text-primary);
+            min-width: 45px;
+            text-align: right;
+        }
+
+        /* Personality Report */
+        .report-section {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .report-card {
+            background: linear-gradient(135deg, rgba(91, 58, 158, 0.05), rgba(168, 85, 247, 0.03));
+            border: 1px solid rgba(91, 58, 158, 0.15);
+            border-radius: var(--radius-md);
+            padding: var(--space-xl);
+        }
+
+        .report-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+            white-space: pre-line;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .btn-secondary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: 14px 24px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            background: transparent;
+            border: 2px solid var(--color-primary);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .btn-outline {
+            color: var(--text-secondary);
+            border-color: var(--border-color);
+        }
+
+        .btn-outline:hover {
+            color: var(--text-primary);
+            border-color: var(--text-secondary);
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            text-align: center;
+            margin-top: var(--space-2xl);
+            padding-top: var(--space-lg);
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .footer a {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.25s;
+        }
+
+        .footer a:hover {
+            color: var(--color-secondary);
+        }
+
+        /* ============================================
+           ACCESSIBILITY
+           ============================================ */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--color-primary);
+            color: white;
+            padding: 12px 24px;
+            z-index: 1000;
+            transition: top 0.3s;
+            border-radius: 0 0 var(--radius-md) 0;
+            font-weight: 500;
+        }
+
+        .skip-link:focus {
+            top: 0;
+            outline: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            #app {
+                padding: var(--space-lg) var(--space-sm);
+            }
+
+            .welcome-card,
+            .question-card,
+            .result-card {
+                padding: var(--space-xl);
+                border-radius: var(--radius-lg);
+            }
+
+            .welcome-card h1 {
+                font-size: 1.75rem;
+            }
+
+            .question-text {
+                font-size: 1.25rem;
+            }
+
+            .rank-level {
+                font-size: 2.5rem;
+            }
+
+            .answer-btn {
+                padding: 16px;
+            }
+
+            .answer-btn .option-text {
+                font-size: 1rem;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-light: #14141A;
+                --bg-card: #1E1E28;
+                --text-primary: #F5F5F7;
+                --text-secondary: #B8B8C0;
+                --text-muted: #787880;
+                --border-color: #2D2D38;
+            }
+        }
     </style>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="app" class="max-w-md mx-auto px-4 py-8 min-h-screen relative">
+    <!-- <a href="#main-content" class="skip-link">跳到主要内容</a> - 移除，以避免分心 -->
+    <div id="app">
+        <div id="main-content"></div>
+
+        <!-- ============================================
+             WELCOME PAGE
+             ============================================ -->
         <div id="welcome-page" class="page active">
-            <div class="card p-8 text-center">
-                <h1 class="text-3xl font-bold mb-4 text-pink-600">✨ 男娘指数测试 ✨</h1>
-                <p class="text-gray-600 mb-3">一共20道简单的是非题</p>
-                <p class="text-gray-500 mb-2 text-sm">测试你的软萌度、娇羞度、女性化、声线天赋、心理认同、行动力六个维度</p>
-                <p class="text-gray-500 mb-6 text-sm">测试结果仅供娱乐 ~</p>
-                <div class="text-xs text-gray-400 mb-8">
-                    <p>📱 建议在手机竖屏下使用</p>
+            <div class="welcome-card">
+                <div class="test-badge">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
                 </div>
-                <button id="start-btn" class="answer-btn w-full py-4 rounded-full bg-gradient-to-r from-pink-400 to-purple-400 text-white font-bold text-lg">
-                    开始测试
+                <h1>男娘指数测试
+                    <span class="subtitle">Discover Your Spectrum</span>
+                </h1>
+                <p class="intro-text">
+                    通过20道精心设计的是非题，探索你内在的六个维度<br>
+                    ——软萌度、娇羞度、女性化、声线天赋、心理认同、行动力
+                </p>
+
+                <div class="dimension-tags">
+                    <span class="dim-tag soft"><span class="dot"></span> 软萌度</span>
+                    <span class="dim-tag shy"><span class="dot"></span> 娇羞度</span>
+                    <span class="dim-tag feminine"><span class="dot"></span> 女性化</span>
+                    <span class="dim-tag voice"><span class="dot"></span> 声线天赋</span>
+                    <span class="dim-tag identity"><span class="dot"></span> 心理认同</span>
+                    <span class="dim-tag action"><span class="dot"></span> 行动力</span>
+                </div>
+
+                <button id="start-btn" class="btn-primary">
+                    <span>开始测试</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
                 </button>
             </div>
         </div>
 
+        <!-- ============================================
+             QUESTION PAGE
+             ============================================ -->
         <div id="question-page" class="page">
-            <div class="progress-bar mb-6">
-                <div id="progress-bar" class="progress-fill" style="width: 0%"></div>
-            </div>
-            <div class="text-center text-gray-500 mb-4" id="progress-text">第 1 / 20 题</div>
-            <div class="card p-8">
-                <h2 id="question-text" class="text-xl font-medium mb-8 text-center"></h2>
-                <div class="grid grid-cols-2 gap-4">
-                    <button id="btn-yes" class="answer-btn py-4 rounded-xl bg-pink-200 text-pink-700 font-bold">✅ 是</button>
-                    <button id="btn-no" class="answer-btn py-4 rounded-xl bg-gray-200 text-gray-700 font-bold">❌ 否</button>
+            <div class="question-wrapper">
+                <div class="progress-section">
+                    <div class="progress-header">
+                        <span class="progress-text">测试进度</span>
+                        <span class="progress-counter" id="progress-counter">1 / 20</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-number">题目 <span id="question-num">1</span></div>
+                    <h2 class="question-text" id="question-text"></h2>
+                    <div class="answer-options">
+                        <button class="answer-btn" id="btn-yes" data-value="true">
+                            <div class="option-indicator">
+                                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <span class="option-label">是</span>
+                            <span class="option-text" id="yes-text"></span>
+                        </button>
+                        <button class="answer-btn" id="btn-no" data-value="false">
+                            <div class="option-indicator">
+                                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </div>
+                            <span class="option-label">否</span>
+                            <span class="option-text" id="no-text"></span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
 
+        <!-- ============================================
+             RESULT PAGE
+             ============================================ -->
         <div id="result-page" class="page">
-            <div id="result-card" class="card p-6">
-                <div class="text-center mb-4">
-                    <div id="result-rank" class="text-5xl font-bold text-pink-500 mb-2">A</div>
-                    <div id="result-score" class="text-lg text-gray-600">综合得分: 75分</div>
+            <div class="result-card">
+                <div class="result-header">
+                    <div class="result-rank-badge">
+                        <span class="rank-level" id="result-rank">S</span>
+                        <span class="rank-label" id="rank-label">等级</span>
+                    </div>
+                    <div class="overall-score">综合得分: <strong id="result-score">0</strong> 分</div>
                 </div>
-                <div id="personality-report" class="text-gray-700 text-sm leading-loose p-5 bg-pink-50/70 rounded-xl mt-5 animate-fade-in whitespace-pre-line"></div>
-                <!-- 分享按钮已移除 -->
-                <button id="btn-restart" class="answer-btn w-full mt-4 py-3 rounded-xl bg-gray-200 text-gray-700">🔄 重新测试</button>
 
-                <div class="mt-6 pt-4 border-t border-gray-200 text-center text-xs text-gray-500">
-                    <p class="mb-2">Made with 💖 by Cheese</p>
-                    <p>QQ: 2190038793 | 微信: cheesemost</p>
-                    <p class="mt-1">
-                        <a href="https://github.com/cheesestudio/FemboyExam" target="_blank" class="text-pink-500 hover:underline">
-                            🔗 GitHub 项目地址
-                        </a>
-                    </p>
+                <div class="radar-section">
+                    <h3 class="section-title">六维能力分布</h3>
+                    <div class="radar-container">
+                        <canvas id="radar-chart" class="radar-chart" width="320" height="320"></canvas>
+                    </div>
+                </div>
+
+                <div class="dimensions-grid">
+                    <h3 class="dimensions-title">维度得分详情</h3>
+                    <div id="dimensions-list"></div>
+                </div>
+
+                <div class="report-section">
+                    <h3 class="dimensions-title">性格分析报告</h3>
+                    <div class="report-card">
+                        <p class="report-text" id="personality-report"></p>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="btn-restart" class="btn-secondary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="1 4 1 10 7 10"></polyline>
+                            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                        </svg>
+                        重新测试
+                    </button>
                 </div>
             </div>
+        </div>
+
+        <div class="footer">
+            <p>Made with 💖 by Cheese</p>
+            <p style="margin-top: 6px;">
+                <a href="https://github.com/cheesestudio/FemboyExam" target="_blank" rel="noopener noreferrer">
+                    GitHub 项目地址
+                </a>
+            </p>
+            <p style="margin-top: 4px;">
+                QQ: 2190038793 | 微信: cheesemost
+            </p>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
     <script src="questions.js"></script>
     <script src="scoring.js"></script>
     <script src="report-generator.js"></script>
+    <script src="radar-chart.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
