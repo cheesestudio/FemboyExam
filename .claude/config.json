@@ -1,0 +1,43 @@
+{
+  "project": {
+    "name": "男娘指数测试 - FemboyExam",
+    "description": "纯前端男娘指数测试网站，16P风格设计",
+    "version": "2.1.0",
+    "type": "web-application",
+    "framework": "vanilla-js"
+  },
+  "preferences": {
+    "autoFormat": true,
+    "autoTest": false,
+    "autoCommit": false,
+    "commitOnRun": false
+  },
+  "environment": {
+    "language": "zh-CN",
+    "nodeVersion": "18+",
+    "browsers": ["chrome", "firefox", "safari", "edge"]
+  },
+  "features": {
+    "radarChart": {
+      "enabled": true,
+      "library": "chart.js",
+      "version": "4.4.8"
+    },
+    "darkMode": {
+      "enabled": true,
+      "type": "system-preference"
+    },
+    "accessibility": {
+      "enabled": true,
+      "ariaLabels": true,
+      "keyboardNavigation": true
+    }
+  },
+  "development": {
+    "scripts": {
+      "start": "npx serve .",
+      "dev": "npx live-server",
+      "build": "echo 'No build step required'"
+    }
+  }
+}

@@ -109,7 +109,14 @@ function answer(value) {
     // 添加点击反馈
     const btn = value ? document.getElementById('btn-yes') : document.getElementById('btn-no');
     if (btn) {
-        btn.style.transform = 'scale(0.95)';
+        // 脉冲点击动画
+        btn.classList.add('clicked');
+        setTimeout(() => {
+            btn.classList.remove('clicked');
+        }, 400);
+
+        // 布局的缩放动画
+        btn.style.transform = 'scale(0.92)';
         setTimeout(() => {
             btn.style.transform = '';
         }, 150);
@@ -299,6 +306,56 @@ document.addEventListener('DOMContentLoaded', () => {
     const noBtn = document.getElementById('btn-no');
     const restartBtn = document.getElementById('btn-restart');
 
+    /**
+     * 创建涟漪效果
+     * @param {Event} e - 点击事件
+     * @param {HTMLElement} btn - 按钮元素
+     */
+    function createRipple(e, btn) {
+        // 确保按钮有相对定位
+        const style = window.getComputedStyle(btn);
+        if (style.position === 'static') {
+            btn.style.position = 'relative';
+        }
+
+        // 移除旧的涟漪
+        const oldRipple = btn.querySelector('.ripple-effect');
+        if (oldRipple) {
+            oldRipple.remove();
+        }
+
+        // 创建新的涟漪元素
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple-effect';
+
+        const rect = btn.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+
+        ripple.style.cssText = `
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.35) 0%, transparent 70%);
+            width: ${size}px;
+            height: ${size}px;
+            left: ${x}px;
+            top: ${y}px;
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        `;
+
+        btn.appendChild(ripple);
+
+        // 动画结束后移除
+        setTimeout(() => {
+            if (ripple.parentNode) {
+                ripple.remove();
+            }
+        }, 600);
+    }
+
     if (startBtn) {
         startBtn.addEventListener('click', () => {
             currentQuestion = 0;
@@ -306,21 +363,37 @@ document.addEventListener('DOMContentLoaded', () => {
             showPage('question');
             renderQuestion();
         });
+        // 添加涟漪效果
+        startBtn.addEventListener('click', function(e) {
+            createRipple(e, this);
+        });
     }
 
     if (yesBtn) {
         yesBtn.addEventListener('click', () => answer(true));
         yesBtn.setAttribute('aria-label', '选择是 - 按键 1 或 右方向键');
+        // 添加涟漪效果
+        yesBtn.addEventListener('click', function(e) {
+            createRipple(e, this);
+        });
     }
 
     if (noBtn) {
         noBtn.addEventListener('click', () => answer(false));
         noBtn.setAttribute('aria-label', '选择否 - 按键 2 或 左方向键');
+        // 添加涟漪效果
+        noBtn.addEventListener('click', function(e) {
+            createRipple(e, this);
+        });
     }
 
     if (restartBtn) {
         restartBtn.addEventListener('click', restart);
         restartBtn.setAttribute('aria-label', '重新开始测试');
+        // 添加涟漪效果
+        restartBtn.addEventListener('click', function(e) {
+            createRipple(e, this);
+        });
     }
 
     // 键盘支持

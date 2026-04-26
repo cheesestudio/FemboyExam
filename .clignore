@@ -1,0 +1,41 @@
+# Claude ignore file - patterns to ignore during analysis
+
+# Backup files
+*.backup
+*.backup.*
+*.orig
+*.old
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/*
+.idea/*
+
+# Build artifacts
+dist/
+build/
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary files
+*.tmp
+*.temp
+
+# Test files (can be excluded from general analysis)
+test/
+__tests__/
+*.test.js
+*.spec.js
+
+# Auto-generated reports
+RESTRUCTURING_SUMMARY.md
+SECURITY_FIXES.md
