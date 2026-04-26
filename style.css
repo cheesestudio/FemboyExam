@@ -601,7 +601,7 @@ body {
 .result-card {
     background: var(--bg-card);
     border-radius: var(--radius-lg);
-    padding: var(--space-2xl);
+    padding: var(--space-xl);
     box-shadow: var(--shadow-lg);
     width: 100%;
     animation: cardSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -610,8 +610,8 @@ body {
 /* Result Header */
 .result-header {
     text-align: center;
-    margin-bottom: var(--space-2xl);
-    padding-bottom: var(--space-xl);
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-md);
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -619,12 +619,12 @@ body {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-sm);
 }
 
 .rank-level {
     font-family: var(--font-display);
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     font-weight: 700;
     color: var(--color-primary);
     line-height: 1;
@@ -632,7 +632,7 @@ body {
 }
 
 .rank-label {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 500;
     color: var(--text-muted);
     text-transform: uppercase;
@@ -640,7 +640,7 @@ body {
 }
 
 .overall-score {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--text-secondary);
 }
 
@@ -651,15 +651,15 @@ body {
 
 /* Radar Chart Section */
 .radar-section {
-    margin-bottom: var(--space-2xl);
+    margin-bottom: var(--space-xl);
 }
 
 .section-title {
     font-family: var(--font-display);
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: var(--text-primary);
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-md);
     text-align: center;
 }
 
@@ -667,37 +667,37 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: var(--space-lg);
+    padding: var(--space-md);
     background: var(--bg-light);
     border-radius: var(--radius-lg);
 }
 
 .radar-chart {
-    max-width: 320px;
+    max-width: 260px;
     width: 100%;
 }
 
 /* Dimension Scores */
 .dimensions-grid {
-    margin-bottom: var(--space-2xl);
+    margin-bottom: var(--space-xl);
 }
 
 .dimensions-title {
     font-family: var(--font-display);
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: var(--text-primary);
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-md);
 }
 
 .dimension-item {
     display: flex;
     align-items: center;
-    gap: var(--space-lg);
-    padding: 16px;
+    gap: var(--space-md);
+    padding: 12px;
     background: var(--bg-light);
     border-radius: var(--radius-md);
-    margin-bottom: var(--space-md);
+    margin-bottom: calc(var(--space-sm) - 2px);
     transition: transform 0.25s, box-shadow 0.25s;
 }
 
@@ -707,8 +707,8 @@ body {
 }
 
 .dim-color-dot {
-    width: 16px;
-    height: 16px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     flex-shrink: 0;
 }
@@ -723,12 +723,13 @@ body {
 .dim-name {
     font-weight: 600;
     color: var(--text-primary);
-    min-width: 80px;
+    min-width: 70px;
+    font-size: 0.85rem;
 }
 
 .dim-bar-container {
     flex: 1;
-    height: 10px;
+    height: 8px;
     background: var(--border-color);
     border-radius: 10px;
     overflow: hidden;
@@ -750,25 +751,26 @@ body {
 .dim-score {
     font-weight: 700;
     color: var(--text-primary);
-    min-width: 45px;
+    min-width: 40px;
     text-align: right;
+    font-size: 0.85rem;
 }
 
 /* Personality Report */
 .report-section {
-    margin-bottom: var(--space-2xl);
+    margin-bottom: var(--space-xl);
 }
 
 .report-card {
     background: linear-gradient(135deg, rgba(91, 58, 158, 0.05), rgba(168, 85, 247, 0.03));
     border: 1px solid rgba(91, 58, 158, 0.15);
     border-radius: var(--radius-md);
-    padding: var(--space-xl);
+    padding: var(--space-lg);
 }
 
 .report-text {
-    font-size: 1rem;
-    line-height: 1.8;
+    font-size: 0.9rem;
+    line-height: 1.7;
     color: var(--text-primary);
     white-space: pre-line;
 }
@@ -777,7 +779,79 @@ body {
 .action-buttons {
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
+    gap: var(--space-sm);
+}
+
+/* Mobile Result Page Optimizations */
+@media (max-width: 480px) {
+    .result-card {
+        padding: var(--space-lg);
+        border-radius: var(--radius-md);
+    }
+
+    .result-header {
+        margin-bottom: var(--space-lg);
+        padding-bottom: var(--space-sm);
+    }
+
+    .rank-level {
+        font-size: 2rem;
+    }
+
+    .radar-chart {
+        max-width: 220px;
+    }
+
+    .radar-container {
+        padding: var(--space-sm);
+    }
+
+    .dimension-item {
+        padding: 10px;
+        gap: var(--space-sm);
+        margin-bottom: 6px;
+    }
+
+    .dim-name {
+        min-width: 60px;
+        font-size: 0.8rem;
+    }
+
+    .dim-bar-container {
+        height: 6px;
+    }
+
+    .dim-score {
+        font-size: 0.8rem;
+        min-width: 35px;
+    }
+
+    .section-title {
+        font-size: 1rem;
+        margin-bottom: var(--space-sm);
+    }
+
+    .report-card {
+        padding: var(--space-md);
+    }
+
+    .report-text {
+        font-size: 0.85rem;
+        line-height: 1.6;
+    }
+
+    .dimensions-title {
+        font-size: 1rem;
+        margin-bottom: var(--space-sm);
+    }
+
+    .dimensions-grid {
+        margin-bottom: var(--space-lg);
+    }
+
+    .radar-section {
+        margin-bottom: var(--space-lg);
+    }
 }
 
 /* Footer */
