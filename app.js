@@ -387,6 +387,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 生成分享图片按钮
+    const generateBtn = document.getElementById('btn-generate');
+    if (generateBtn) {
+        generateBtn.addEventListener('click', generateShareImage);
+        generateBtn.setAttribute('aria-label', '生成分享图片');
+        generateBtn.addEventListener('click', function(e) {
+            createRipple(e, this);
+        });
+    }
+
     if (restartBtn) {
         restartBtn.addEventListener('click', restart);
         restartBtn.setAttribute('aria-label', '重新开始测试');
