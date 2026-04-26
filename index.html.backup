@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="男娘指数测试 - 趣味性格测试">
+    <meta name="theme-color" content="#FFB5BA">
+    <title>男娘指数测试 ✨</title>
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <!-- External libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom CSS variables and styles -->
+    <style>
+        :root {
+            /* 保留原有的马卡龙配色系统，同时添加UI/UX Pro Max建议的变量 */
+            --macaron-pink: #F78A93;
+            --macaron-yellow: #F5D76E;
+            --macaron-blue: #6BBCE0;
+            --macaron-green: #7ED393;
+            --macaron-purple: #B794D4;
+            --macaron-orange: #F9B26F;
+
+            /* UI/UX Pro Max建议的颜色变量 */
+            --color-primary: #7C3AED;
+            --color-secondary: #A78BFA;
+            --color-cta: #22C55E;
+            --color-background: #FAF5FF;
+            --color-text: #4C1D95;
+
+            /* 中性色 */
+            --macaron-white: #FFFAF0;
+            --macaron-gray: #F0F0F0;
+            --macaron-dark-gray: #444444;
+
+            /* 辅助色 */
+            --focus-ring: rgba(107, 188, 224, 0.6);
+            --shadow: rgba(0, 0, 0, 0.1);
+
+            /* 间距变量 */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+
+            /* 阴影变量 */
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.15);
+        }
+
+        /* 全局基础样式 - 增强可访问性 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--macaron-pink) 0%, var(--macaron-yellow) 50%, var(--macaron-blue) 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--macaron-dark-gray);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            padding-bottom: env(safe-area-inset-bottom); /* iPhone X刘海适配 */
+        }
+
+        /* 跳过链接 - 无障碍访问 */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--macaron-blue);
+            color: white;
+            padding: 8px 16px;
+            z-index: 1000;
+            transition: top 0.3s ease-out;
+            border-radius: 0 0 8px 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* 页面过渡动画 */
+        .page {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                       transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+            position: absolute;
+            inset: 0;
+        }
+
+        .page.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+
+        .page.fade-out {
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        /* 卡片容器 */
+        .card {
+            background: var(--macaron-white);
+            border-radius: 20px;
+            padding: var(--space-lg);
+            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        /* 按钮样式 - 符合触摸目标和可访问性标准 */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px; /* 最小触摸目标 */
+            min-width: 48px;
+            padding: 12px 24px;
+            font-weight: 600;
+            font-size: 16px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+            text-decoration: none;
+            gap: var(--space-sm);
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #6D28D9;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(124, 58, 237, 0.08);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--macaron-dark-gray);
+            border: 2px solid var(--macaron-gray);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--macaron-pink);
+            color: var(--macaron-pink);
+        }
+
+        /* 选项按钮 - 改进的触摸目标和可访问性 */
+        .option-btn {
+            width: 100%;
+            min-height: 56px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            border-radius: 14px;
+            border: 2px solid transparent;
+            background: var(--macaron-gray);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: 500;
+            color: var(--macaron-dark-gray);
+        }
+
+        .option-btn:hover {
+            border-color: var(--macaron-pink);
+            background: rgba(247, 138, 147, 0.06);
+            transform: translateY(-1px);
+        }
+
+        .option-btn:active {
+            transform: translateY(0);
+        }
+
+        .option-btn.selected {
+            border-color: var(--macaron-pink);
+            background: rgba(247, 138, 147, 0.12);
+            box-shadow: 0 2px 12px rgba(247, 138, 147, 0.15);
+        }
+
+        .option-label {
+            background: var(--macaron-gray);
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--macaron-dark-gray);
+            font-size: 15px;
+            flex-shrink: 0;
+            min-width: 36px;
+        }
+
+        .option-btn.selected .option-label {
+            background: var(--macaron-pink);
+            color: white;
+        }
+
+        /* 问题文本 */
+        .question-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--macaron-dark-gray);
+            margin-bottom: var(--space-lg);
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        /* 进度条 */
+        .progress-container {
+            height: 8px;
+            background: var(--macaron-gray);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: var(--space-md);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--macaron-pink), var(--macaron-purple));
+            border-radius: 4px;
+            transition: width 0.5s ease-out;
+        }
+
+        /* 结果展示 */
+        .result-rank {
+            font-size: 4.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin: var(--space-md) 0;
+            background: linear-gradient(90deg, var(--macaron-pink), var(--macaron-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .result-score {
+            font-size: 1.5rem;
+            text-align: center;
+            color: var(--macaron-dark-gray);
+            margin-bottom: var(--space-lg);
+            font-weight: 500;
+        }
+
+        .personality-report {
+            background: rgba(247, 138, 147, 0.08);
+            border-radius: 16px;
+            padding: var(--space-lg);
+            margin: var(--space-lg) 0;
+            border: 1px solid rgba(247, 138, 147, 0.2);
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--macaron-dark-gray);
+        }
+
+        /* 底部信息 */
+        .footer-info {
+            text-align: center;
+            margin-top: var(--space-2xl);
+            padding-top: var(--space-lg);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        .footer-info a {
+            color: var(--macaron-pink);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.2s ease;
+        }
+
+        .footer-info a:hover {
+            opacity: 0.8;
+        }
+
+        /* 加载状态 */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* 响应式设计 - 移动端优先 */
+        @media (max-width: 640px) {
+            body {
+                padding: env(safe-area-inset-top) env(safe-area-inset-right)
+                       env(safe-area-inset-bottom) env(safe-area-inset-left);
+            }
+
+            #app {
+                padding: 12px !important;
+                min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+                display: flex;
+                align-items: stretch;
+            }
+
+            .card {
+                padding: var(--space-md) !important;
+                margin: 0;
+                border-radius: 16px;
+            }
+
+            h1 {
+                font-size: 1.8rem !important;
+                line-height: 1.3;
+                margin-bottom: var(--space-lg);
+            }
+
+            h2 {
+                font-size: 1.3rem !important;
+                line-height: 1.4;
+                margin-bottom: var(--space-lg);
+            }
+
+            .btn {
+                min-height: 56px !important;
+                font-size: 1.1rem !important;
+            }
+
+            .option-btn {
+                min-height: 52px !important;
+                padding: 14px 16px !important;
+                font-size: 16px !important;
+            }
+
+            .question-text {
+                font-size: 18px !important;
+            }
+
+            .result-rank {
+                font-size: 3.5rem !important;
+            }
+        }
+
+        /* 高对比度模式支持 */
+        @media (prefers-contrast: high) {
+            :root {
+                --macaron-pink: #E05A66;
+                --macaron-dark-gray: #222222;
+                --macaron-gray: #CCCCCC;
+            }
+        }
+
+        /* 减少动画模式 */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* 暗色模式支持 */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: linear-gradient(135deg, #8B0000 0%, #4B0082 50%, #000080 100%);
+            }
+
+            .card {
+                background: rgba(30, 30, 30, 0.8);
+                color: #FFFFFF;
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+
+            .macaron-white {
+                --macaron-white: rgba(255, 255, 255, 0.05);
+            }
+
+            .macaron-gray {
+                --macaron-gray: rgba(255, 255, 255, 0.1);
+            }
+
+            .macaron-dark-gray {
+                --macaron-dark-gray: #E0E0E0;
+            }
+
+            .option-btn {
+                background: rgba(255, 255, 255, 0.05);
+                color: #E0E0E0;
+            }
+
+            .option-btn.selected {
+                background: rgba(247, 138, 147, 0.2);
+            }
+
+            .option-label {
+                background: rgba(255, 255, 255, 0.1);
+                color: #E0E0E0;
+            }
+
+            .option-btn.selected .option-label {
+                background: var(--macaron-pink);
+                color: white;
+            }
+
+            .progress-fill {
+                background: linear-gradient(90deg, #FF6B9D, #4ECDC4);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 跳过链接 - 无障碍访问 -->
+    <a href="#main-content" class="skip-link">跳到主要内容</a>
+
+    <div id="app" class="max-w-2xl mx-auto px-4 py-8 min-h-screen relative" id="main-content">
+        <!-- 欢迎页面 -->
+        <div id="welcome-page" class="page active">
+            <div class="card">
+                <div class="space-y-6 text-center">
+                    <h1 class="text-3xl font-bold text-pink-600 mb-2">
+                        ✨ 男娘指数测试 ✨
+                    </h1>
+                    <p class="text-gray-600 mb-3">一共20道简单的是非题</p>
+                    <p class="text-gray-500 mb-4 text-sm">
+                        测试你的软萌度、娇羞度、女性化、声线天赋、心理认同、行动力六个维度
+                    </p>
+                    <p class="text-gray-500 mb-6 text-sm">
+                        测试结果仅供娱乐 ~
+                    </p>
+
+                    <!-- 移动端提示 -->
+                    <div class="text-xs text-gray-400 flex items-center justify-center gap-2">
+                        <span>📱</span>
+                        <span>建议在手机竖屏下使用获得最佳体验</span>
+                    </div>
+
+                    <button id="start-btn" class="btn btn-primary w-full">
+                        开始测试
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 问题页面 -->
+        <div id="question-page" class="page">
+            <div class="space-y-4">
+                <!-- 进度条 -->
+                <div class="progress-container">
+                    <div id="progress-bar" class="progress-fill" style="width: 0%"></div>
+                </div>
+                <div class="text-center text-gray-500" id="progress-text">第 1 / 20 题</div>
+
+                <!-- 问题卡片 -->
+                <div class="card">
+                    <h2 id="question-text" class="question-text"></h2>
+                    <div class="space-y-3">
+                        <button id="btn-yes" class="option-btn">
+                            <span class="option-label">✅</span>
+                            <span>是</span>
+                        </button>
+                        <button id="btn-no" class="option-btn">
+                            <span class="option-label">❌</span>
+                            <span>否</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 结果页面 -->
+        <div id="result-page" class="page">
+            <div id="result-card" class="card space-y-6">
+                <!-- 排名和得分 -->
+                <div class="space-y-3 text-center">
+                    <div id="result-rank" class="result-rank">A</div>
+                    <div id="result-score" class="result-score">综合得分: 75分</div>
+                </div>
+
+                <!-- 性格报告 -->
+                <div id="personality-report" class="personality-report whitespace-pre-line"></div>
+
+                <!-- 重新测试按钮 -->
+                <button id="btn-restart" class="btn btn-outline w-full">
+                    🔄 重新测试
+                </button>
+            </div>
+
+            <!-- 底部信息 -->
+            <div class="footer-info">
+                <p class="mb-2">Made with 💖 by Cheese</p>
+                <p>QQ: 2190038793 | 微信: cheesemost</p>
+                <p class="mt-2">
+                    <a href="https://github.com/cheesestudio/FemboyExam" target="_blank" rel="noopener noreferrer">
+                        🔗 GitHub 项目地址
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 原有的脚本加载保持不变 -->
+    <script src="questions.js"></script>
+    <script src="scoring.js"></script>
+    <script src="report-generator.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

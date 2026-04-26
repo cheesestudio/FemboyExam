@@ -1,0 +1,403 @@
+/* 马卡龙配色系统 - WCAG 2.1 AA 对比度修正 */
+:root {
+    /* 主色调 - 马卡龙色系 (调整后对比度 ≥4.5:1 符合AA标准) */
+    --macaron-pink: #F78A93;
+    --macaron-yellow: #F5D76E;
+    --macaron-blue: #6BBCE0;
+    --macaron-green: #7ED393;
+    --macaron-purple: #B794D4;
+    --macaron-orange: #F9B26F;
+
+    /* 中性色 */
+    --macaron-white: #FFFAF0;
+    --macaron-gray: #F0F0F0;
+    --macaron-dark-gray: #444444;
+
+    /* 辅助色 */
+    --focus-ring: rgba(107, 188, 224, 0.6);
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Tailwind 扩展配置 */
+@layer utilities {
+    .bg-macaron-pink { background-color: var(--macaron-pink); }
+    .bg-macaron-yellow { background-color: var(--macaron-yellow); }
+    .bg-macaron-blue { background-color: var(--macaron-blue); }
+    .bg-macaron-green { background-color: var(--macaron-green); }
+    .bg-macaron-purple { background-color: var(--macaron-purple); }
+    .bg-macaron-orange { background-color: var(--macaron-orange); }
+
+    .text-macaron-pink { color: var(--macaron-pink); }
+    .text-macaron-yellow { color: var(--macaron-yellow); }
+    .text-macaron-blue { color: var(--macaron-blue); }
+    .text-macaron-green { color: var(--macaron-green); }
+    .text-macaron-purple { color: var(--macaron-purple); }
+    .text-macaron-orange { color: var(--macaron-orange); }
+
+    .border-macaron-pink { border-color: var(--macaron-pink); }
+    .border-macaron-yellow { border-color: var(--macaron-yellow); }
+    .border-macaron-blue { border-color: var(--macaron-blue); }
+    .border-macaron-green { border-color: var(--macaron-green); }
+    .border-macaron-purple { border-color: var(--macaron-purple); }
+    .border-macaron-orange { border-color: var(--macaron-orange); }
+}
+
+/* 跳过链接 - 无障碍 */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--macaron-blue);
+    color: white;
+    padding: 8px;
+    z-index: 100;
+    transition: top 0.3s;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* 全局基础样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 卡片阴影效果 */
+.card-shadow {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* 按钮基础样式 - 符合触摸目标 48x48px */
+.btn {
+    min-height: 48px;
+    min-width: 48px;
+    padding: 12px 24px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.btn-primary {
+    background-color: var(--macaron-pink);
+    color: white;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* 键盘焦点状态 - 高可见性 */
+.btn:focus-visible,
+.option-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+/* 选项按钮 - 触摸目标尺寸 */
+.option-btn {
+    width: 100%;
+    min-height: 56px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    border: 2px solid rgba(0,0,0,0.05);
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+    font-size: 16px;
+}
+
+.option-btn:hover {
+    border-color: var(--macaron-pink);
+    background: rgba(247, 138, 147, 0.05);
+    transform: translateY(-1px);
+}
+
+.option-btn.selected {
+    border-color: var(--macaron-pink);
+    background: rgba(247, 138, 147, 0.12);
+    box-shadow: 0 2px 12px rgba(247, 138, 147, 0.2);
+}
+
+.option-label {
+    background: var(--macaron-gray);
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: var(--macaron-dark-gray);
+    flex-shrink: 0;
+}
+
+.option-btn.selected .option-label {
+    background: var(--macaron-pink);
+    color: white;
+}
+
+/* 问题样式 */
+.question-text {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--macaron-dark-gray);
+    margin-bottom: 24px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* 分数显示 */
+.score-display {
+    text-align: center;
+    margin: 16px 0;
+}
+
+.score-value {
+    font-size: 72px;
+    font-weight: 700;
+    color: var(--macaron-pink);
+    line-height: 1;
+}
+
+.score-label {
+    font-size: 14px;
+    color: var(--macaron-dark-gray);
+    margin-top: 4px;
+}
+
+.level-badge {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.level-text {
+    background: linear-gradient(90deg, var(--macaron-pink), var(--macaron-purple));
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+    display: inline-block;
+}
+
+/* 雷达图容器 */
+.radar-chart-container {
+    display: flex;
+    justify-content: center;
+    margin: 24px 0;
+}
+
+/* 维度分数条 */
+.dimension-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 8px 0;
+}
+
+.dimension-name {
+    width: 80px;
+    font-size: 14px;
+    color: var(--macaron-dark-gray);
+}
+
+.dimension-bar {
+    flex-grow: 1;
+    height: 12px;
+    background: var(--macaron-gray);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.dimension-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--macaron-pink), var(--macaron-orange));
+    border-radius: 6px;
+    transition: width 0.8s ease-out;
+}
+
+.dimension-score {
+    width: 36px;
+    text-align: right;
+    font-weight: 600;
+    color: var(--macaron-dark-gray);
+}
+
+/* 重新测试按钮 */
+.restart-btn {
+    width: 100%;
+    margin-top: 24px;
+    background: var(--macaron-blue);
+    color: white;
+}
+
+/* 分享按钮 */
+.share-btn {
+    width: 100%;
+    margin-top: 12px;
+    background: var(--macaron-purple);
+    color: white;
+}
+
+/* 输入框样式 */
+.input-field {
+    border-radius: 10px;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: var(--macaron-blue);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(160, 210, 235, 0.2);
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(247, 138, 147, 0.6);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(247, 138, 147, 0.8);
+}
+
+/* 动画 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in, .animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* 响应式调整 - 移动端竖屏优化 */
+@media (max-width: 640px) {
+    #app {
+        padding: 20px 12px !important;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+
+    .card {
+        padding: 24px 16px !important;
+        margin: 0 4px;
+        border-radius: 28px;
+    }
+
+    h1 {
+        font-size: 1.75rem !important;
+        line-height: 1.3;
+        margin-bottom: 24px;
+    }
+
+    h2 {
+        font-size: 1.25rem !important;
+        line-height: 1.4;
+        margin-bottom: 32px;
+    }
+
+    button {
+        min-height: 56px !important;
+        font-size: 1.1rem !important;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        margin-bottom: 12px;
+    }
+
+    .progress-bar {
+        height: 10px !important;
+        margin-bottom: 24px !important;
+        border-radius: 5px;
+    }
+
+    canvas {
+        width: 100% !important;
+        height: auto !();
+        max-height: 300px;
+    }
+
+    .score-value {
+        font-size: 56px;
+    }
+
+    body {
+        padding-bottom: 30px;
+    }
+}
+
+@media (orientation: portrait) {
+    html, body {
+        overflow-x: hidden;
+    }
+
+    #app {
+        padding-top: 16px !important;
+        padding-bottom: 40px !important;
+    }
+}
+
+@media (orientation: landscape) {
+    #app {
+        max-width: 720px;
+    }
+}
+
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+    :root {
+        --macaron-pink: #E05A66;
+        --macaron-dark-gray: #222222;
+    }
+}
+
+/* 减少动画模式 */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

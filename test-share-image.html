@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Share Image Test</title>
+</head>
+<body>
+    <h1>Share Image Test</h1>
+    <button onclick="test()">Generate Image</button>
+    <div id="result"></div>
+
+    <script src="share.js"></script>
+    <script>
+    function test() {
+        const result = {
+            scores: { soft: 85, shy: 72, feminine: 90, voice: 68, identity: 88, action: 75 },
+            total: 80,
+            rank: 'A'
+        };
+        window.ShareModule.generateShareImage(result)
+            .then(() => { document.getElementById('result').innerHTML = 'Success!'; })
+            .catch(e => { document.getElementById('result').innerHTML = 'Error: ' + e.message; });
+    }
+    </script>
+</body>
+</html>

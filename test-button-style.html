@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>按钮样式测试</title>
+    <style>
+        :root {
+            --color-primary: #5B3A9E;
+            --color-secondary: #8B5CF6;
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --radius-md: 12px;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+            margin-top: var(--space-sm);
+            align-items: center;  /* 居中按钮 */
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+
+        .btn-secondary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: 12px 24px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: #e0e0e0;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+        }
+
+        /* Generate Image Button */
+        .btn-generate {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            width: auto;           /* 自适应宽度 */
+            min-width: 200px;      /* 最小宽度 */
+            padding: 12px 24px;    /* 内边距 */
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin: 0 auto var(--space-xs);  /* 自身居中 */
+            box-shadow: 0 4px 12px rgba(91, 58, 158, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-generate:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 24px rgba(91, 58, 158, 0.3);
+        }
+
+        .btn-generate:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        .btn-generate::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-generate:hover::before {
+            left: 100%;
+        }
+
+        .btn-generate svg {
+            width: 18px;
+            height: 18px;
+            stroke: white;
+            transition: transform 0.3s;
+        }
+
+        .btn-generate:hover svg {
+            transform: translateX(4px);
+        }
+    </style>
+</head>
+<body>
+    <div class="action-buttons">
+        <button id="btn-generate" class="btn-generate">
+            <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+            生成分享图片
+        </button>
+        <button id="btn-restart" class="btn-secondary">
+            <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="1 4 1 10 7 10"></polyline>
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+            </svg>
+            重新测试
+        </button>
+    </div>
+
+    <p style="text-align: center; color: #666; margin-top: 30px;">
+        测试按钮样式 - 居中显示，宽度自适应
+    </p>
+</body>
+</html>

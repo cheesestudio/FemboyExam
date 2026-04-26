@@ -147,6 +147,16 @@ function finishTest() {
         showPage('result');
         renderResult();
     }, 300);
+
+    // 更新URL以支持分享
+    if (window.history && window.ShareModule && window.ShareModule.encodeResult) {
+        try {
+            const newUrl = window.ShareModule.encodeResult(result.scores);
+            window.history.replaceState(null, '', newUrl);
+        } catch (e) {
+            console.warn('Failed to update URL for sharing:', e);
+        }
+    }
 }
 
 /**
@@ -289,6 +299,15 @@ function restart() {
     answers = [];
     result = null;
 
+    // 清理URL hash
+    if (window.history && window.location.hash) {
+        try {
+            window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        } catch (e) {
+            // 忽略错误，继续执行
+        }
+    }
+
     // 销毁雷达图
     if (window.RadarChartComponent) {
         window.RadarChartComponent.destroy();
@@ -305,6 +324,46 @@ document.addEventListener('DOMContentLoaded', () => {
     const yesBtn = document.getElementById('btn-yes');
     const noBtn = document.getElementById('btn-no');
     const restartBtn = document.getElementById('btn-restart');
+    const shareLinkBtn = document.getElementById('btn-share-link');
+
+    // 检查URL hash以加载分享的结果
+    if (window.ShareModule && window.ShareModule.decodeResult) {
+        const sharedScores = window.ShareModule.decodeResult();
+        if (sharedScores) {
+            // 计算结果并显示
+            result = calculateScoreFromShared(sharedScores);
+            setTimeout(() => {
+                showPage('result');
+                renderResult();
+            }, 100);
+        }
+    }
+
+    /**
+     * 从分享的得分计算结果
+     * @param {Object} sharedScores - 从URL解码的得分对象
+     * @returns {Object} 计算结果对象
+     */
+    function calculateScoreFromShared(sharedScores) {
+        // 确保所有维度都存在
+        const scores = {};
+        let total = 0;
+        DIMENSIONS.forEach(d => {
+            scores[d] = sharedScores[d] || 0;
+            total += scores[d];
+        });
+
+        const average = Math.round(total / 6);
+
+        let rank;
+        if (average >= 90) rank = 'Saob';
+        else if (average >= 75) rank = 'A';
+        else if (average >= 60) rank = 'B';
+        else if (average >= 40) rank = 'C';
+        else rank = 'D';
+
+        return { scores, total: average, rank };
+    }
 
     /**
      * 创建涟漪效果
@@ -406,6 +465,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 复制分享链接按钮
+    if (shareLinkBtn) {
+        shareLinkBtn.addEventListener('click', async () => {
+            if (result && window.ShareModule && window.ShareModule.copyShareLink) {
+                try {
+                    const success = await window.ShareModule.copyShareLink(result.scores);
+                    if (success) {
+                        window.ShareModule.showNotice('✓ 分享链接已复制到剪贴板', 2000);
+                    } else {
+                        window.ShareModule.showNotice('✗ 复制失败，请手动复制', 2000);
+                    }
+                } catch (e) {
+                    console.error('Failed to copy share link:', e);
+                    window.ShareModule.showNotice('✗ 复制失败', 2000);
+                }
+            }
+        });
+        shareLinkBtn.setAttribute('aria-label', '复制分享链接');
+        shareLinkBtn.addEventListener('click', function(e) {
+            createRipple(e, this);
+        });
+    }
+
     // 键盘支持
     document.addEventListener('keydown', (e) => {
         if (pages.question.classList.contains('active')) {
@@ -423,51 +505,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 分享图片生成
     function generateShareImage() {
-        const canvas = document.getElementById('radar-chart');
-        const resultCard = document.querySelector('.result-card');
-
-        if (!canvas || !resultCard) return;
-
-        // 使用 html2canvas 来截取全部内容
-        // 如果 html2canvas 不可用，则使用 Canvas 直接下载
-        if (typeof html2canvas !== 'undefined') {
-            html2canvas(resultCard, {
-                backgroundColor: '#F8F7FC',
-                scale: 2,
-                width: resultCard.offsetWidth,
-                height: resultCard.offsetHeight,
-                onclone: function(clonedDoc) {
-                    const clonedCard = clonedDoc.querySelector('.result-card');
-                    if (clonedCard) {
-                        clonedCard.style.transform = 'none';
-                        clonedCard.style.animation = 'none';
-                    }
-                }
-            }).then(function(canvasImg) {
-                const link = document.createElement('a');
-                link.download = `男娘指数测试结果-${Date.now()}.png`;
-                link.href = canvasImg.toDataURL('image/png');
-                link.click();
-            }).catch(function(err) {
-                console.error('Image generation failed:', err);
-                fallbackDownload();
-            });
-        } else {
-            fallbackDownload();
+        if (!result) {
+            console.error('No result available for image generation');
+            window.ShareModule.showNotice('✗ 生成失败，请重试', 2000);
+            return;
         }
-    }
 
-    // 降级方案：直接下载radar chart canvas
-    function fallbackDownload() {
-        const canvas = document.getElementById('radar-chart');
-        if (canvas) {
-            const link = document.createElement('a');
-            link.download = `雷达图-${Date.now()}.png`;
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-            alert('雷达图已保存到下载夹');
-        } else {
-            alert('生成图片失败');
+        try {
+            window.ShareModule.generateShareImage(result).then(() => {
+                window.ShareModule.showNotice('✓ 图片已保存到下载夹', 2000);
+            }).catch((error) => {
+                console.error('Image generation failed:', error);
+                window.ShareModule.showNotice('✗ 生成失败', 2000);
+            });
+        } catch (error) {
+            console.error('Image generation error:', error);
+            window.ShareModule.showNotice('✗ 生成失败', 2000);
         }
     }
 
