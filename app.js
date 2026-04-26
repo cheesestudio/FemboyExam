@@ -411,5 +411,55 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // 分享图片生成
+    function generateShareImage() {
+        const canvas = document.getElementById('radar-chart');
+        const resultCard = document.querySelector('.result-card');
+
+        if (!canvas || !resultCard) return;
+
+        // 使用 html2canvas 来截取全部内容
+        // 如果 html2canvas 不可用，则使用 Canvas 直接下载
+        if (typeof html2canvas !== 'undefined') {
+            html2canvas(resultCard, {
+                backgroundColor: '#F8F7FC',
+                scale: 2,
+                width: resultCard.offsetWidth,
+                height: resultCard.offsetHeight,
+                onclone: function(clonedDoc) {
+                    const clonedCard = clonedDoc.querySelector('.result-card');
+                    if (clonedCard) {
+                        clonedCard.style.transform = 'none';
+                        clonedCard.style.animation = 'none';
+                    }
+                }
+            }).then(function(canvasImg) {
+                const link = document.createElement('a');
+                link.download = `男娘指数测试结果-${Date.now()}.png`;
+                link.href = canvasImg.toDataURL('image/png');
+                link.click();
+            }).catch(function(err) {
+                console.error('Image generation failed:', err);
+                fallbackDownload();
+            });
+        } else {
+            fallbackDownload();
+        }
+    }
+
+    // 降级方案：直接下载radar chart canvas
+    function fallbackDownload() {
+        const canvas = document.getElementById('radar-chart');
+        if (canvas) {
+            const link = document.createElement('a');
+            link.download = `雷达图-${Date.now()}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            alert('雷达图已保存到下载夹');
+        } else {
+            alert('生成图片失败');
+        }
+    }
+
     console.log('⭐ 男娘指数测试 - 16P风格版本 已加载完成');
 });
