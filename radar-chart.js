@@ -153,6 +153,9 @@ const RadarChartComponent = {
             return;
         }
 
+        // 销毁已有实例，确保可以重用
+        this.destroy();
+
         // 设置高清屏幕支持
         const dpr = window.devicePixelRatio || 1;
         const rect = canvas.getBoundingClientRect();
